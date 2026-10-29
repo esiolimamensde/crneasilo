@@ -6,15 +6,19 @@ tags: paginas
 ---
 {%- from "components/macros.njk" import icon, cardNoticia, eventoItem, cardServico -%}
 <section class="hero" aria-labelledby="hero-titulo">
-  <img class="hero-img" src="/assets/img/hero-frutal.svg" width="1600" height="700" fetchpriority="high"
-       alt="Ilustração de uma paisagem do interior: colinas verdes, árvores e um rio que corta o campo sob céu azul. Imagem provisória, a ser substituída por foto de Frutal.">
-  <div class="container">
-    <h1 id="hero-titulo">Cuidar do meio ambiente de Frutal é tarefa de todos</h1>
-    <p>Aqui você encontra serviços, informações e canais para solicitar licenças, pedir uma muda ou fazer uma denúncia ambiental.</p>
-    <div class="acoes">
-      <a class="btn btn-claro btn-grande" href="/servicos/">{{ icon("file-check") }} Solicitar um serviço</a>
-      <a class="btn btn-terciario btn-grande" href="/servicos/denuncias-ambientais/solicitar/">{{ icon("megaphone") }} Fazer uma denúncia ambiental</a>
+  <div class="container hero-grid">
+    <div class="hero-texto">
+      <h1 id="hero-titulo">Cuidar do meio ambiente de Frutal é tarefa de todos</h1>
+      <p>Peça uma licença, solicite uma muda ou faça uma denúncia ambiental, de forma simples e com número de protocolo.</p>
+      <div class="acoes">
+        <a class="btn btn-primario btn-grande" href="/servicos/">Solicitar um serviço</a>
+        <a class="btn btn-terciario btn-grande" href="/servicos/denuncias-ambientais/solicitar/">Fazer uma denúncia ambiental</a>
+      </div>
     </div>
+    <figure class="hero-figura">
+      <img class="hero-img" src="/assets/img/hero-frutal.svg" width="1600" height="700" fetchpriority="high"
+           alt="Ilustração de uma paisagem do interior: colinas verdes, árvores e um rio que corta o campo sob céu azul. Imagem provisória, a ser substituída por foto de Frutal.">
+    </figure>
   </div>
 </section>
 
@@ -29,15 +33,20 @@ tags: paginas
   </div>
 </section>
 
-<section class="secao secao-info" aria-labelledby="h-mvv">
-  <div class="container">
-    <h2 id="h-mvv">Nossa missão, visão e valores</h2>
-    <div class="grid grid-3">
-      <article class="card"><span class="icone-fundo">{{ icon("leaf") }}</span><h3>Missão</h3><p>{{ missao.missao }}</p></article>
-      <article class="card"><span class="icone-fundo">{{ icon("tree") }}</span><h3>Visão</h3><p>{{ missao.visao }}</p></article>
-      <article class="card"><span class="icone-fundo">{{ icon("droplet") }}</span><h3>Valores</h3><ul>{% for v in missao.valores | limit(4) %}<li>{{ v }}</li>{% endfor %}</ul><p><a href="/sobre/#valores">Ver todos os valores</a></p></article>
+<section class="secao" aria-labelledby="h-mvv">
+  <div class="container mvv">
+    <div>
+      <h2 id="h-mvv">Nossa missão</h2>
+      <p class="mvv-destaque">{{ missao.missao }}</p>
     </div>
-    <p class="pequeno suave" style="margin-top:1rem">{{ missao.nota }}</p>
+    <div class="mvv-lado">
+      <h3>Visão</h3>
+      <p>{{ missao.visao }}</p>
+      <h3>Valores</h3>
+      <ul>{% for v in missao.valores | limit(4) %}<li>{{ v }}</li>{% endfor %}</ul>
+      <p><a href="/sobre/#valores">Ver todos os valores</a></p>
+      <p class="pequeno suave">{{ missao.nota }}</p>
+    </div>
   </div>
 </section>
 
@@ -51,7 +60,7 @@ tags: paginas
   </div>
 </section>
 
-<section class="secao secao-verde" aria-labelledby="h-noticias">
+<section class="secao secao-info" aria-labelledby="h-noticias">
   <div class="container">
     <h2 id="h-noticias">Últimas notícias</h2>
     <div class="grid grid-3">

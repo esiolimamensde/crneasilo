@@ -4,7 +4,7 @@ ordem: 7
 icone: search
 categoria: Acompanhamento
 semFormulario: true
-acaoUrl: "#consulta"
+acao: "#consulta"
 acaoTexto: Consultar protocolo
 resumo: Acompanhe o andamento de qualquer solicitação, denúncia ou agendamento.
 oQueE: Consulta do andamento de um pedido feito neste site, usando o número de protocolo recebido ao enviar o formulário.

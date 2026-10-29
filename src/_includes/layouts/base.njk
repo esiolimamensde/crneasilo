@@ -1,5 +1,5 @@
 {%- from "components/macros.njk" import icon -%}
-{%- set tituloPagina = (title + " — " + site.nome) if (title and page.url != "/") else (site.nomeCompleto + " | " + site.municipio + " (" + site.uf + ")") -%}
+{%- set tituloPagina = (title + " - " + site.nome) if (title and page.url != "/") else (site.nomeCompleto + " | " + site.municipio + " (" + site.uf + ")") -%}
 {%- set desc = description or site.descricao -%}
 {%- set urlCanonica = site.url + page.url -%}
 <!doctype html>

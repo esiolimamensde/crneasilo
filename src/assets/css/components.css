@@ -87,17 +87,6 @@ html.alto-contraste .btn-secundario { color: #00E5FF; }
 .acoes { display: flex; flex-wrap: wrap; gap: var(--e3); }
 
 /* ---- Hero ---- */
-.hero { position: relative; color: #fff; background: #14301A; overflow: hidden; }
-.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-hero-overlay) 0%, rgba(14,40,20,.55) 100%); }
-.hero .container { position: relative; z-index: 1; padding-block: var(--e7); }
-.hero h1 { color: #fff; max-width: 22ch; }
-.hero p { max-width: 55ch; font-size: 1.125rem; }
-.hero .acoes { margin-top: var(--e5); }
-.hero .btn-terciario { background: transparent; color: #fff; border-color: #fff; }
-.hero .btn-terciario:hover { background: rgba(255,255,255,.18); }
-.hero :focus-visible { outline-color: #FFEB3B; box-shadow: 0 0 0 6px #000; }
-@media (min-width: 64em) { .hero .container { padding-block: 5.5rem; } }
 .page-hero { background: var(--c-green-bg); border-bottom: 1px solid var(--c-border); padding-block: var(--e5) var(--e6); }
 .page-hero h1 { margin-bottom: var(--e2); }
 .page-hero p { max-width: var(--medida); margin: 0; font-size: 1.125rem; }
@@ -304,3 +293,94 @@ body.tem-cta-fixo .cookie-banner { bottom: 5rem; }
 .fixar-topo { margin-top: var(--e5); }
 
 .page-hero .meta, .page-hero .suave, .secao-verde .meta, .secao-verde .suave { color: var(--c-text); }
+
+/* ================= Refinamento visual: limpo, calmo, confiável ================= */
+h1, h2, h3 { letter-spacing: -.012em; }
+h2 { margin-top: var(--e7); }
+.secao { padding-block: var(--e7); }
+@media (min-width: 64em) { .secao { padding-block: 5rem; } }
+.secao > .container > h2:first-child { margin-bottom: var(--e5); }
+
+/* Cabeçalho e barra de utilidades mais leves */
+.utilbar { font-size: .8125rem; }
+.site-header { box-shadow: none; border-bottom: 1px solid var(--c-border); }
+.marca-logo { border-radius: var(--raio); }
+.nav-principal a { font-weight: 600; color: var(--c-text); }
+.nav-principal a:hover { background: transparent; color: var(--c-primary-hover); }
+
+/* Hero */
+.hero { background: linear-gradient(180deg, #E8F3E8 0%, var(--c-bg) 100%); color: var(--c-text); }
+html.alto-contraste .hero { background: #000; }
+.hero-grid { display: grid; gap: var(--e6); align-items: center; padding-block: var(--e6) var(--e7); }
+.hero-texto h1 { max-width: 16ch; margin-bottom: var(--e4); }
+.hero-texto p { max-width: 46ch; font-size: 1.1875rem; color: var(--c-text-2); margin-bottom: var(--e5); }
+html.alto-contraste .hero-texto p { color: #fff; }
+.hero-figura { margin: 0; border-radius: calc(var(--raio) * 2); overflow: hidden; aspect-ratio: 16 / 10; background: var(--c-green-bg); }
+.hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (min-width: 64em) {
+  .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 4rem; padding-block: 4.5rem; }
+  .hero-figura { aspect-ratio: 5 / 4; }
+}
+
+/* Cabeçalho de página interna: claro e discreto */
+.page-hero { background: transparent; border-bottom: 1px solid var(--c-border); padding-block: var(--e4) var(--e6); }
+.page-hero h1 { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.375rem); }
+.page-hero p { color: var(--c-text-2); font-size: 1.0625rem; }
+.page-hero .meta, .page-hero .suave { color: var(--c-text-2); }
+
+/* Cards: planos, sem peso */
+.card { box-shadow: none; border-color: var(--c-border); padding: var(--e5); }
+.card-link:hover, .card-link:focus-within { box-shadow: var(--sombra); border-color: #B7C4B4; }
+.icone-fundo { width: 2.75rem; height: 2.75rem; background: #E3F1E3; }
+.card-img { aspect-ratio: 16 / 10; }
+.badge { background: #E3F1E3; font-weight: 600; }
+.badge-azul { background: #EAF5FB; border-color: #CBE6F5; }
+
+/* Atalhos: blocos simples */
+.atalho { box-shadow: none; min-height: 6.5rem; font-weight: 600; background: var(--c-surface); }
+.atalho:hover { background: #F0F7F0; }
+.atalho .icone-fundo { width: 3rem; height: 3rem; }
+
+/* Faixas de seção: só uma cor de apoio */
+.secao-info { background: #EEF6F1; }
+html.alto-contraste .secao-info { background: #000; }
+
+/* Missão em destaque, sem cards */
+.mvv { display: grid; gap: var(--e6); }
+.mvv-destaque { font-size: clamp(1.25rem, 1rem + 1vw, 1.625rem); line-height: 1.5; max-width: 34ch; margin: 0; }
+.mvv-lado h3 { margin-top: 0; font-size: 1rem; color: var(--c-text-2); font-weight: 600; }
+.mvv-lado h3:not(:first-child) { margin-top: var(--e5); }
+.mvv-lado > :not(h3) { max-width: 52ch; }
+@media (min-width: 64em) { .mvv { grid-template-columns: 1fr 1fr; gap: 5rem; } .mvv-lado { border-left: 1px solid var(--c-border); padding-left: 3rem; } }
+
+/* Números: sem caixas */
+.numeros { gap: var(--e5) var(--e6); }
+.numero { background: transparent; border: 0; border-top: 3px solid var(--verde); border-radius: 0; padding: var(--e3) 0 0; text-align: left; }
+html.alto-contraste .numero { border-top-color: #FFEB3B; }
+.numero .valor { font-size: 2.25rem; margin-bottom: var(--e1); }
+
+/* Eventos e listas */
+.evento-item { border-radius: var(--raio); padding: var(--e4); }
+.data-caixa { border-radius: .6rem; }
+.fixar-topo { margin-top: var(--e5); }
+
+/* Formulários e botões: mesma forma */
+.btn { font-weight: 600; letter-spacing: .005em; }
+.btn-terciario { border-color: #9DB0C4; }
+.filtros, .ficha-item, .tabela-wrap, .alerta { box-shadow: none; }
+.ficha-item { background: var(--c-surface); }
+
+/* Rodapé mais calmo */
+.site-footer { margin-top: var(--e8); }
+.rodape-grid { padding-block: 4rem; }
+.site-footer h2 { font-size: 1rem; text-transform: none; letter-spacing: 0; color: #fff; }
+
+/* Movimento discreto e respeitando preferências */
+@media (prefers-reduced-motion: no-preference) {
+  .card-link, .atalho, .btn { transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease, transform .2s ease; }
+  .atalho:hover { transform: translateY(-2px); }
+}
+.badge-aviso { background: var(--aviso-fundo); color: #5D4200; border-color: var(--aviso); }
+.badge-cinza { background: #E4E7EB; color: #323F4B; }
+.badge-oficial { background: #14301A; color: #fff; }
+html.alto-contraste .badge, html.alto-contraste .badge-oficial, html.alto-contraste .badge-aviso, html.alto-contraste .badge-azul { background: #000; color: #fff; border: 1px solid #fff; }

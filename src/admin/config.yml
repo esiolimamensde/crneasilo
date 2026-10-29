@@ -1,4 +1,4 @@
-# Decap CMS — painel para servidores publicarem sem conhecimento técnico.
+# Decap CMS - painel para servidores publicarem sem conhecimento técnico.
 # Backend: ajuste "repo" e a forma de login conforme docs/modelo-de-conteudo.md.
 backend:
   name: github
@@ -18,7 +18,7 @@ collections:
     folder: src/noticias
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{categoria}} — {{title}}"
+    summary: "{{categoria}} - {{title}}"
     fields:
       - { label: Título, name: title, widget: string, hint: "Frase curta e clara." }
       - { label: Data de publicação, name: date, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }

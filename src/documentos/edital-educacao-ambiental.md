@@ -1,5 +1,5 @@
 ---
-title: Edital de chamamento — educação ambiental [●]
+title: Edital de chamamento - educação ambiental [●]
 date: 2026-09-10
 tipo: edital
 orgao: Secretaria de Meio Ambiente
