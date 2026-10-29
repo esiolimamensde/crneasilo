@@ -1,0 +1,52 @@
+{%- from "components/macros.njk" import icon -%}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="rodape-grid">
+      <section aria-labelledby="rod-links">
+        <h2 id="rod-links">Links úteis</h2>
+        <ul>
+          {%- for l in navegacao.rodapeLinks %}
+          <li>{% if l.url == "[●]" %}{{ l.titulo }} <span class="placeholder">[●]</span>{% else %}<a href="{{ l.url }}"{% if l.url.startsWith("http") %} rel="noopener"{% endif %}>{{ l.titulo }}</a>{% endif %}</li>
+          {%- endfor %}
+        </ul>
+      </section>
+      <section aria-labelledby="rod-redes">
+        <h2 id="rod-redes">Redes sociais</h2>
+        <ul>
+          {%- for r in site.redes %}
+          <li>{% if r.url == "[●]" %}{{ icon(r.icone) }} {{ r.nome }}: <span class="placeholder">[●]</span>{% else %}<a href="{{ r.url }}" rel="noopener">{{ icon(r.icone) }} {{ r.nome }}</a>{% endif %}</li>
+          {%- endfor %}
+        </ul>
+      </section>
+      <section aria-labelledby="rod-inst">
+        <h2 id="rod-inst">{{ site.nomeCompleto }}</h2>
+        <address>
+          <p>CNPJ: {{ site.cnpj }}<br>
+          Endereço: {{ site.endereco }}<br>
+          Telefone: {{ site.telefone }}<br>
+          E-mail: {{ site.email }}<br>
+          Horário: {{ site.horario }}</p>
+        </address>
+      </section>
+    </div>
+    <nav class="mapa-site" aria-labelledby="rod-mapa">
+      <h2 id="rod-mapa">Mapa do site</h2>
+      <ul>
+        {%- for item in navegacao.principal %}<li><a href="{{ item.url }}">{{ item.titulo }}</a></li>{% endfor %}
+        <li><a href="/contato/">Contato</a></li>
+        <li><a href="/servicos/denuncias-ambientais/">Denúncia ambiental</a></li>
+        <li><a href="/servicos/consultar-protocolo/">Consultar protocolo</a></li>
+        <li><a href="/busca/">Busca</a></li>
+        <li><a href="/mapa-do-site/">Mapa do site completo</a></li>
+      </ul>
+    </nav>
+    <div class="rodape-base">
+      <ul>
+        <li><a href="/privacidade/">Política de privacidade</a></li>
+        <li><a href="/termos-de-uso/">Termos de uso</a></li>
+        <li><a href="/acessibilidade/">Declaração de acessibilidade</a></li>
+      </ul>
+      <p>Última atualização em <time datetime="{{ site.ultimaAtualizacao }}">{{ site.ultimaAtualizacao | dataBR }}</time>. {{ site.creditos }}</p>
+    </div>
+  </div>
+</footer>

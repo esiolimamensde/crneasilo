@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="page-hero">
+  <div class="container">
+    <p class="meta" style="margin-bottom:.5rem"><span class="badge badge-azul">{{ categoria }}</span></p>
+    <h1>{{ title }}</h1>
+    <p>{{ resumo }}</p>
+  </div>
+</div>
+<div class="container secao">
+  <div class="layout-servico">
+    <div>
+      <div class="ficha">
+        <section class="ficha-item" aria-labelledby="s-oque"><h2 id="s-oque">{{ icon("info") }} O que é</h2><p>{{ oQueE }}</p></section>
+        <section class="ficha-item" aria-labelledby="s-quem"><h2 id="s-quem">{{ icon("users") }} Quem pode solicitar</h2><p>{{ quemPode }}</p></section>
+        <section class="ficha-item" aria-labelledby="s-docs"><h2 id="s-docs">{{ icon("file") }} Documentos necessários</h2>
+          {% if documentos %}<ul>{% for d in documentos %}<li>{{ d }}</li>{% endfor %}</ul>{% else %}<p>Nenhum documento é necessário.</p>{% endif %}
+        </section>
+        <section class="ficha-item" aria-labelledby="s-canal"><h2 id="s-canal">{{ icon("phone") }} Canal de atendimento</h2>
+          <ul>{% for c in canais %}<li><strong>{{ c.tipo }}:</strong> {{ c.texto }}</li>{% endfor %}</ul>
+        </section>
+        <section class="ficha-item" aria-labelledby="s-prazo"><h2 id="s-prazo">{{ icon("clock") }} Prazo estimado</h2><p>{{ prazo }}</p></section>
+        <section class="ficha-item" aria-labelledby="s-custo"><h2 id="s-custo">{{ icon("file-check") }} Custo</h2><p>{{ custo }}</p></section>
+      </div>
+
+      <section aria-labelledby="s-passos">
+        <h2 id="s-passos">Como solicitar</h2>
+        <ol class="passos">{% for p in passos %}<li><span>{{ p }}</span></li>{% endfor %}</ol>
+      </section>
+
+      {% if content | trim %}<div class="texto">{{ content | safe }}</div>{% endif %}
+
+      {% if baseLegal %}<aside class="alerta alerta-info" aria-label="Base legal">{{ icon("info") }}<div><span class="alerta-titulo">Base legal</span>{{ baseLegal }}</div></aside>{% endif %}
+    </div>
+
+    <aside class="lateral" aria-label="Ações do serviço">
+      <div class="card">
+        <h2 style="font-size:1.125rem">Pronto para solicitar?</h2>
+        {% if acaoUrl %}<a class="btn btn-primario btn-grande btn-bloco" href="{{ acaoUrl }}">{{ acaoTexto or "Iniciar solicitação" }}</a>{% endif %}
+        <a class="btn btn-terciario btn-bloco" href="/servicos/consultar-protocolo/">Consultar protocolo</a>
+        <p class="pequeno suave">Dúvidas? Veja as <a href="/servicos/orientacoes/">perguntas frequentes</a> ou <a href="/contato/">fale conosco</a>.</p>
+      </div>
+    </aside>
+  </div>
+</div>

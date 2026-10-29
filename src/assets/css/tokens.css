@@ -1,0 +1,62 @@
+/* Tokens de design — paleta da natureza (ver docs/design-system.md) */
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap;
+  src: url("/assets/fonts/source-sans-3-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap;
+  src: url("/assets/fonts/source-sans-3-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  /* Paleta base */
+  --verde: #2E7D32;
+  --verde-escuro: #1B5E20;
+  --verde-claro: #A5D6A7;
+  --azul: #0277BD;
+  --azul-texto: #01579B;   /* azul de links: #0277BD tem 4,45:1 sobre #F5F7F4, abaixo de 4,5:1 */
+  --azul-claro: #E1F5FE;
+  --texto: #1F2933;
+  --texto-2: #52606D;
+  --fundo: #F5F7F4;
+  --branco: #FFFFFF;
+  --erro: #C62828;
+  --erro-fundo: #FDECEA;
+  --aviso: #F9A825;
+  --aviso-fundo: #FFF8E1;
+  --sucesso-fundo: #E8F5E9;
+  --borda: #CBD2C8;
+
+  /* Papéis semânticos (redefinidos no alto contraste) */
+  --c-bg: var(--fundo);
+  --c-surface: var(--branco);
+  --c-text: var(--texto);
+  --c-text-2: var(--texto-2);
+  --c-primary: var(--verde);
+  --c-primary-hover: var(--verde-escuro);
+  --c-on-primary: #FFFFFF;
+  --c-secondary: var(--azul-texto);
+  --c-secondary-hover: #003F6F;
+  --c-link: var(--azul-texto);
+  --c-border: var(--borda);
+  --c-info-bg: var(--azul-claro);
+  --c-green-bg: var(--verde-claro);
+  --c-focus: #7A3E00;
+  --c-focus-halo: #FFFFFF;
+  --c-header-bg: var(--branco);
+  --c-footer-bg: #14301A;
+  --c-footer-text: #F1F5F0;
+  --c-hero-overlay: rgba(14, 40, 20, .78);
+
+  /* Tipografia */
+  --fonte: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --lh: 1.6;
+  --medida: 70ch;
+
+  /* Espaçamento e forma */
+  --e1: .25rem; --e2: .5rem; --e3: .75rem; --e4: 1rem; --e5: 1.5rem; --e6: 2rem; --e7: 3rem; --e8: 4rem;
+  --raio: .5rem;
+  --sombra: 0 1px 2px rgba(31, 41, 51, .08), 0 2px 8px rgba(31, 41, 51, .06);
+  --toque: 2.75rem; /* 44px */
+  --gutter: 1rem;
+  --largura: 72rem;
+}
+@media (min-width: 48em) { :root { --gutter: 1.5rem; } }

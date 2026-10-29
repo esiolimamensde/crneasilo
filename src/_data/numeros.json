@@ -1,0 +1,10 @@
+{
+  "referencia": "[●]",
+  "itens": [
+    { "valor": "[●]", "rotulo": "hectares de Área de Preservação Permanente (APP) protegidos", "icone": "droplet" },
+    { "valor": "[●]", "rotulo": "árvores plantadas no município", "icone": "tree" },
+    { "valor": "[●]", "rotulo": "programas e projetos em andamento", "icone": "leaf" },
+    { "valor": "[●]", "rotulo": "atendimentos realizados no último ano", "icone": "users" }
+  ],
+  "explicacao": "APP é a faixa de vegetação ao redor de rios, nascentes e topos de morro. Ela protege a água e o solo."
+}

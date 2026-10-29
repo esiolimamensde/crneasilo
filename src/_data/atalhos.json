@@ -1,0 +1,10 @@
+[
+  { "titulo": "Licenças", "icone": "file-check", "url": "/servicos/licencas-autorizacoes/" },
+  { "titulo": "Denúncias", "icone": "megaphone", "url": "/servicos/denuncias-ambientais/" },
+  { "titulo": "Agendamentos", "icone": "calendar-check", "url": "/servicos/agendamentos/" },
+  { "titulo": "Coleta e Resíduos", "icone": "recycle", "url": "/servicos/coleta-destinacao/" },
+  { "titulo": "Arborização", "icone": "tree", "url": "/servicos/arborizacao/" },
+  { "titulo": "Educação Ambiental", "icone": "book", "url": "/projetos/educacao-ambiental/" },
+  { "titulo": "Documentos", "icone": "file", "url": "/transparencia/documentos/" },
+  { "titulo": "Fale conosco", "icone": "mail", "url": "/contato/" }
+]

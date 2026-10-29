@@ -1,0 +1,29 @@
+---
+layout: layouts/pagina.njk
+title: Mapa do site
+lead: Todas as páginas do site em uma lista.
+permalink: /mapa-do-site/index.html
+tags: paginas
+crumbs: []
+description: Mapa do site da Secretaria de Meio Ambiente de Frutal.
+---
+<ul>
+  <li><a href="/">Início</a></li>
+  <li><a href="/sobre/">Sobre a Secretaria</a></li>
+  <li><a href="/servicos/">Serviços</a>
+    <ul>
+      {%- for s in collections.servicos %}<li><a href="{{ s.url }}">{{ s.data.title }}</a></li>{% endfor %}
+      <li><a href="/servicos/orientacoes/">Orientações ao cidadão (perguntas frequentes)</a></li>
+    </ul></li>
+  <li><a href="/projetos/">Projetos e ações</a>
+    <ul>{%- for p in collections.projetos %}<li><a href="{{ p.url }}">{{ p.data.title }}</a></li>{% endfor %}</ul></li>
+  <li><a href="/noticias/">Notícias</a></li>
+  <li><a href="/calendario/">Calendário ambiental</a></li>
+  <li><a href="/transparencia/">Transparência e documentos</a>
+    <ul><li><a href="/transparencia/acesso-a-informacao/">Acesso à informação</a></li><li><a href="/transparencia/documentos/">Documentos e publicações</a></li></ul></li>
+  <li><a href="/contato/">Contato</a></li>
+  <li><a href="/busca/">Busca</a></li>
+  <li><a href="/acessibilidade/">Declaração de acessibilidade</a></li>
+  <li><a href="/privacidade/">Política de privacidade</a></li>
+  <li><a href="/termos-de-uso/">Termos de uso</a></li>
+</ul>

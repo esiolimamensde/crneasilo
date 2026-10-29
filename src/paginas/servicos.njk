@@ -1,0 +1,20 @@
+---
+layout: layouts/pagina.njk
+title: Serviços
+lead: Escolha o serviço que você precisa. Em cada página você vê quem pode pedir, os documentos, o passo a passo, o prazo e o custo.
+permalink: /servicos/index.html
+tags: paginas
+crumbs: []
+description: "Serviços da Secretaria de Meio Ambiente de Frutal: licenças, denúncias, agendamentos, coleta, arborização e orientações."
+---
+{%- from "components/macros.njk" import icon, cardServico -%}
+<div class="grid grid-3">
+  {%- for s in collections.servicos %}{{ cardServico(s, 2) }}{% endfor %}
+  <article class="card card-link">
+    <span class="icone-fundo">{{ icon("book") }}</span>
+    <h2><a href="/servicos/orientacoes/">Orientações ao cidadão (perguntas frequentes)</a></h2>
+    <p>Respostas em linguagem simples, organizadas por tema, com busca.</p>
+    <span class="mais" aria-hidden="true">Ver perguntas {{ icon("arrow-right", "icon-sm") }}</span>
+  </article>
+</div>
+<div class="alerta alerta-info" style="margin-top:2rem">{{ icon("info") }}<div><span class="alerta-titulo">Já fez um pedido?</span><a href="/servicos/consultar-protocolo/">Consulte o andamento com seu número de protocolo</a>.</div></div>

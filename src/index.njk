@@ -1,0 +1,107 @@
+---
+layout: layouts/base.njk
+title: Início
+description: "Informações, serviços e canais de atendimento da Secretaria Municipal de Meio Ambiente de Frutal (MG): licenças, denúncias ambientais, arborização, coleta e educação ambiental."
+tags: paginas
+---
+{%- from "components/macros.njk" import icon, cardNoticia, eventoItem, cardServico -%}
+<section class="hero" aria-labelledby="hero-titulo">
+  <img class="hero-img" src="/assets/img/hero-frutal.svg" width="1600" height="700" fetchpriority="high"
+       alt="Ilustração de uma paisagem do interior: colinas verdes, árvores e um rio que corta o campo sob céu azul. Imagem provisória, a ser substituída por foto de Frutal.">
+  <div class="container">
+    <h1 id="hero-titulo">Cuidar do meio ambiente de Frutal é tarefa de todos</h1>
+    <p>Aqui você encontra serviços, informações e canais para solicitar licenças, pedir uma muda ou fazer uma denúncia ambiental.</p>
+    <div class="acoes">
+      <a class="btn btn-claro btn-grande" href="/servicos/">{{ icon("file-check") }} Solicitar um serviço</a>
+      <a class="btn btn-terciario btn-grande" href="/servicos/denuncias-ambientais/solicitar/">{{ icon("megaphone") }} Fazer uma denúncia ambiental</a>
+    </div>
+  </div>
+</section>
+
+<section class="secao" aria-labelledby="h-atalhos">
+  <div class="container">
+    <h2 id="h-atalhos">O que você procura?</h2>
+    <ul class="atalhos">
+      {%- for a in atalhos %}
+      <li><a class="atalho" href="{{ a.url }}"><span class="icone-fundo">{{ icon(a.icone) }}</span>{{ a.titulo }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="secao secao-info" aria-labelledby="h-mvv">
+  <div class="container">
+    <h2 id="h-mvv">Nossa missão, visão e valores</h2>
+    <div class="grid grid-3">
+      <article class="card"><span class="icone-fundo">{{ icon("leaf") }}</span><h3>Missão</h3><p>{{ missao.missao }}</p></article>
+      <article class="card"><span class="icone-fundo">{{ icon("tree") }}</span><h3>Visão</h3><p>{{ missao.visao }}</p></article>
+      <article class="card"><span class="icone-fundo">{{ icon("droplet") }}</span><h3>Valores</h3><ul>{% for v in missao.valores | limit(4) %}<li>{{ v }}</li>{% endfor %}</ul><p><a href="/sobre/#valores">Ver todos os valores</a></p></article>
+    </div>
+    <p class="pequeno suave" style="margin-top:1rem">{{ missao.nota }}</p>
+  </div>
+</section>
+
+<section class="secao" aria-labelledby="h-servicos">
+  <div class="container">
+    <h2 id="h-servicos">Serviços em destaque</h2>
+    <div class="grid grid-4">
+      {%- for s in collections.servicos %}{% if s.data.destaqueHome %}{{ cardServico(s) }}{% endif %}{% endfor %}
+    </div>
+    <p class="fixar-topo"><a class="btn btn-terciario" href="/servicos/">Ver todos os serviços</a></p>
+  </div>
+</section>
+
+<section class="secao secao-verde" aria-labelledby="h-noticias">
+  <div class="container">
+    <h2 id="h-noticias">Últimas notícias</h2>
+    <div class="grid grid-3">
+      {%- for n in collections.noticias | limit(3) %}{{ cardNoticia(n) }}{% endfor %}
+    </div>
+    <p class="fixar-topo"><a class="btn btn-terciario" href="/noticias/">Ver todas as notícias</a></p>
+  </div>
+</section>
+
+<section class="secao" aria-labelledby="h-eventos">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:start">
+      <div>
+        <h2 id="h-eventos" style="margin-top:0">Próximos eventos</h2>
+        <ul class="lista-limpa">
+          {%- for e in collections.eventosTodos | aPartirDe(buildDate) | limit(3) %}{{ eventoItem(e) }}{% endfor %}
+        </ul>
+        <p class="fixar-topo"><a class="btn btn-terciario" href="/calendario/">{{ icon("calendar") }} Ver calendário ambiental</a></p>
+      </div>
+      <div>
+        <h2 style="margin-top:0">Frutal em números</h2>
+        <ul class="numeros" style="grid-template-columns:1fr 1fr">
+          {%- for n in numeros.itens %}<li class="numero"><span class="valor">{{ n.valor }}</span>{{ n.rotulo }}</li>{% endfor %}
+        </ul>
+        <p class="pequeno suave" style="margin-top:.75rem">Dados oficiais, referência: {{ numeros.referencia }}. <strong>APP</strong>: {{ numeros.explicacao }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="secao" aria-label="Canal de denúncias e informações úteis">
+  <div class="container">
+    <div class="grid grid-2">
+      <article class="card" style="border-left:.5rem solid var(--erro)">
+        <span class="icone-fundo">{{ icon("megaphone") }}</span>
+        <h2 style="font-size:1.375rem">Canal de denúncias</h2>
+        <p>Viu queimada, lixo jogado em local errado, desmatamento, poluição ou maus-tratos a animais? Denuncie. <strong>Você pode fazer a denúncia sem se identificar.</strong></p>
+        <p><a class="btn btn-primario" href="/servicos/denuncias-ambientais/solicitar/">Fazer denúncia</a></p>
+      </article>
+      <article class="card">
+        <span class="icone-fundo">{{ icon("info") }}</span>
+        <h2 style="font-size:1.375rem">Informações úteis</h2>
+        <ul class="lista-limpa">
+          <li>{{ icon("clock") }} <strong>Horário de atendimento:</strong> {{ site.horario }}</li>
+          <li>{{ icon("phone") }} <strong>Telefone:</strong> {{ site.telefone }}</li>
+          <li>{{ icon("alert") }} <strong>Emergência ambiental:</strong> {{ site.telefoneEmergencia }}</li>
+          <li>{{ icon("map-pin") }} <strong>Endereço:</strong> {{ site.endereco }}</li>
+        </ul>
+        <p><a href="/contato/">Ver todos os canais de contato</a></p>
+      </article>
+    </div>
+  </div>
+</section>

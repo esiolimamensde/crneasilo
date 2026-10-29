@@ -1,0 +1,11 @@
+{
+  "descricao": "O Conselho Municipal de Meio Ambiente (CODEMA) é um grupo formado por representantes do poder público e da sociedade. Ele discute e decide sobre políticas ambientais do município. [●] Base legal de criação.",
+  "composicao": [
+    { "segmento": "Poder público", "representantes": "[●]" },
+    { "segmento": "Sociedade civil e ONGs", "representantes": "[●]" },
+    { "segmento": "Setor produtivo", "representantes": "[●]" },
+    { "segmento": "Universidades e instituições de ensino", "representantes": "[●]" }
+  ],
+  "reunioes": "As reuniões são abertas ao público. Datas e pautas: [●].",
+  "atasFiltro": "ata"
+}

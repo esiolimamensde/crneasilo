@@ -1,0 +1,19 @@
+/* Modo de alto contraste — ativado pela classe .alto-contraste no <html> */
+html.alto-contraste {
+  --c-bg: #000; --c-surface: #000; --c-text: #fff; --c-text-2: #fff;
+  --c-primary: #FFEB3B; --c-primary-hover: #FFF59D; --c-on-primary: #000;
+  --c-secondary: #00E5FF; --c-secondary-hover: #84FFFF; --c-link: #00E5FF;
+  --c-border: #fff; --c-info-bg: #000; --c-green-bg: #000;
+  --c-focus: #FFEB3B; --c-focus-halo: #000;
+  --c-header-bg: #000; --c-footer-bg: #000; --c-footer-text: #fff; --c-hero-overlay: rgba(0,0,0,.88);
+  --erro: #FF8A80; --erro-fundo: #000; --aviso-fundo: #000; --sucesso-fundo: #000; --aviso: #FFEB3B;
+  --sombra: none;
+}
+html.alto-contraste .card, html.alto-contraste .alerta, html.alto-contraste input,
+html.alto-contraste select, html.alto-contraste textarea, html.alto-contraste .badge { border-color: #fff; }
+html.alto-contraste a { text-decoration: underline; }
+html.alto-contraste .btn { border: 2px solid #fff; }
+html.alto-contraste .btn-secundario, html.alto-contraste .btn-terciario { color: #00E5FF; background: #000; border-color: #00E5FF; }
+html.alto-contraste .hero-img, html.alto-contraste img { filter: grayscale(1) contrast(1.1); }
+html.alto-contraste .icone-fundo { background: #000; border: 2px solid #fff; color: #fff; }
+html.alto-contraste .badge { background: #000; color: #fff; border: 1px solid #fff; }

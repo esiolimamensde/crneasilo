@@ -1,0 +1,154 @@
+# Decap CMS — painel para servidores publicarem sem conhecimento técnico.
+# Backend: ajuste "repo" e a forma de login conforme docs/modelo-de-conteudo.md.
+backend:
+  name: github
+  repo: esiolimamensde/crneasilo
+  branch: main
+locale: pt
+media_folder: src/assets/img/uploads
+public_folder: /assets/img/uploads
+site_url: https://meioambiente.frutal.mg.gov.br
+display_url: https://meioambiente.frutal.mg.gov.br
+# local_backend: true   # descomente para testar localmente com `npx decap-server`
+
+collections:
+  - name: noticias
+    label: Notícias e comunicados
+    label_singular: notícia
+    folder: src/noticias
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{categoria}} — {{title}}"
+    fields:
+      - { label: Título, name: title, widget: string, hint: "Frase curta e clara." }
+      - { label: Data de publicação, name: date, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - label: Categoria
+        name: categoria
+        widget: select
+        options: [{ label: Notícia, value: noticia }, { label: Comunicado oficial, value: comunicado }, { label: Aviso de atendimento, value: aviso }, { label: Edital, value: edital }]
+      - { label: Número de publicação, name: numero, widget: string, required: false, hint: "Só para comunicados oficiais. Exemplo: 002/2026" }
+      - { label: Resumo, name: resumo, widget: text, hint: "Até duas frases. Aparece nas listas." }
+      - { label: Imagem, name: imagem, widget: image, required: false }
+      - { label: Texto alternativo da imagem, name: alt, widget: string, required: false, hint: "Descreva o que aparece na foto, para quem não enxerga. Obrigatório se houver imagem." }
+      - { label: Crédito da imagem, name: credito, widget: string, required: false }
+      - { label: Texto completo, name: body, widget: markdown }
+
+  - name: eventos
+    label: Calendário (campanhas e eventos)
+    label_singular: evento
+    folder: src/eventos
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Nome, name: title, widget: string }
+      - { label: Data de início, name: date, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - { label: Data de término, name: dataFim, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false, hint: "Só se durar mais de um dia." }
+      - label: Tipo
+        name: tipo
+        widget: select
+        options: [{ label: Campanha, value: campanha }, { label: Evento, value: evento }, { label: Data comemorativa, value: data }, { label: Prazo de serviço, value: prazo }]
+      - { label: Horário, name: hora, widget: string, required: false }
+      - { label: Local, name: local, widget: string, required: false }
+      - { label: Descrição, name: descricao, widget: text }
+      - label: Destaque
+        name: destaque
+        widget: select
+        required: false
+        options: [{ label: Semana da Água, value: agua }, { label: Semana do Meio Ambiente, value: meioambiente }]
+
+  - name: documentos
+    label: Documentos e publicações
+    label_singular: documento
+    folder: src/documentos
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Data do documento, name: date, widget: datetime, date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - label: Tipo
+        name: tipo
+        widget: select
+        options: [{ label: Lei, value: lei }, { label: Decreto, value: decreto }, { label: Portaria, value: portaria }, { label: Resolução, value: resolucao }, { label: Plano, value: plano }, { label: Relatório, value: relatorio }, { label: Edital, value: edital }, { label: Ata, value: ata }]
+      - { label: Órgão, name: orgao, widget: string, default: Secretaria de Meio Ambiente }
+      - { label: Arquivo, name: arquivo, widget: file, media_folder: /src/arquivos, public_folder: /arquivos }
+      - { label: Formato, name: formato, widget: string, default: PDF }
+      - { label: Tamanho, name: tamanho, widget: string, hint: "Exemplo: 2,3 MB" }
+      - { label: "Tem versão acessível para leitor de tela?", name: acessivel, widget: boolean, default: false }
+
+  - name: projetos
+    label: Projetos e ações
+    label_singular: projeto
+    folder: src/projetos
+    create: true
+    fields:
+      - { label: Nome do projeto, name: title, widget: string }
+      - { label: Ordem na lista, name: ordem, widget: number, value_type: int, default: 10 }
+      - label: Situação
+        name: status
+        widget: select
+        options: [{ label: Em andamento, value: andamento }, { label: Concluído, value: concluido }, { label: Planejado, value: planejado }]
+      - { label: Área de atuação, name: area, widget: string }
+      - { label: Período, name: periodo, widget: string, hint: "Exemplo: 2025 a 2027" }
+      - { label: Responsável, name: responsavel, widget: string }
+      - { label: Resumo, name: resumo, widget: text }
+      - { label: Objetivo, name: objetivo, widget: text }
+      - { label: Público beneficiado, name: publico, widget: text }
+      - { label: Resultados, name: resultados, widget: text }
+      - { label: Detalhes (opcional), name: body, widget: markdown, required: false }
+
+  - name: servicos
+    label: Serviços
+    label_singular: serviço
+    folder: src/servicos
+    create: true
+    fields:
+      - { label: Nome do serviço, name: title, widget: string }
+      - { label: Ordem na lista, name: ordem, widget: number, value_type: int, default: 10 }
+      - { label: Tipo de demanda, name: categoria, widget: string, hint: "Exemplo: Licenciamento" }
+      - { label: Ícone, name: icone, widget: select, options: [file, file-check, megaphone, calendar-check, recycle, tree, book, droplet, leaf, mail] }
+      - { label: "Aparece em destaque no início?", name: destaqueHome, widget: boolean, default: false, hint: "Marque no máximo 4 serviços." }
+      - { label: Resumo (uma frase), name: resumo, widget: text }
+      - { label: O que é (uma frase), name: oQueE, widget: text }
+      - { label: Quem pode solicitar, name: quemPode, widget: text }
+      - { label: Documentos necessários, name: documentos, widget: list, field: { label: Documento, name: doc, widget: string }, required: false }
+      - { label: Passo a passo, name: passos, widget: list, field: { label: Passo, name: passo, widget: string } }
+      - { label: Prazo estimado, name: prazo, widget: string }
+      - { label: Custo, name: custo, widget: string, hint: "“Gratuito” ou o valor da taxa." }
+      - label: Canais de atendimento
+        name: canais
+        widget: list
+        fields:
+          - { label: Canal, name: tipo, widget: select, options: [Online, Presencial, Telefone, Emergência] }
+          - { label: Detalhe, name: texto, widget: string }
+      - { label: Base legal, name: baseLegal, widget: text, required: false }
+      - { label: Texto adicional, name: body, widget: markdown, required: false }
+
+  - name: dados
+    label: Dados gerais do site
+    files:
+      - label: Contatos e informações da Secretaria
+        name: site
+        file: src/_data/site.json
+        fields:
+          - { label: CNPJ, name: cnpj, widget: string }
+          - { label: Endereço, name: endereco, widget: string }
+          - { label: Telefone, name: telefone, widget: string }
+          - { label: Telefone de emergência ambiental, name: telefoneEmergencia, widget: string }
+          - { label: WhatsApp, name: whatsapp, widget: string }
+          - { label: E-mail, name: email, widget: string }
+          - { label: Horário de atendimento, name: horario, widget: string }
+          - { label: Endereço do e-SIC (link), name: esicUrl, widget: string }
+          - { label: Data da última atualização, name: ultimaAtualizacao, widget: string, hint: "AAAA-MM-DD" }
+      - label: Números de impacto
+        name: numeros
+        file: src/_data/numeros.json
+        fields:
+          - { label: Período de referência, name: referencia, widget: string }
+          - { label: Texto de apoio, name: explicacao, widget: text }
+          - label: Itens
+            name: itens
+            widget: list
+            fields:
+              - { label: Valor, name: valor, widget: string }
+              - { label: Descrição, name: rotulo, widget: string }
+              - { label: Ícone, name: icone, widget: select, options: [droplet, tree, leaf, users] }

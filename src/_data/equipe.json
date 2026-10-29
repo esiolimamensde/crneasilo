@@ -1,0 +1,18 @@
+{
+  "nota": "Lista de exemplo. A Secretaria deve informar nomes, cargos e fotos, com autorização de cada pessoa [●].",
+  "setores": [
+    { "setor": "Gabinete", "membros": [
+      { "nome": "[●] Nome do(a) Secretário(a)", "cargo": "Secretário(a) Municipal de Meio Ambiente", "foto": "", "ocultarFoto": false }
+    ]},
+    { "setor": "Licenciamento e Fiscalização", "membros": [
+      { "nome": "[●] Nome", "cargo": "Coordenador(a) de Licenciamento", "foto": "", "ocultarFoto": false },
+      { "nome": "[●] Nome", "cargo": "Fiscal ambiental", "foto": "", "ocultarFoto": true }
+    ]},
+    { "setor": "Arborização e Áreas Verdes", "membros": [
+      { "nome": "[●] Nome", "cargo": "Engenheiro(a) agrônomo(a) / florestal", "foto": "", "ocultarFoto": false }
+    ]},
+    { "setor": "Educação Ambiental e Resíduos", "membros": [
+      { "nome": "[●] Nome", "cargo": "Coordenador(a) de Educação Ambiental", "foto": "", "ocultarFoto": false }
+    ]}
+  ]
+}

@@ -1,0 +1,45 @@
+---
+layout: layouts/pagina.njk
+title: Notícias e comunicados
+lead: Fique por dentro das ações da Secretaria, avisos de atendimento, comunicados oficiais e editais.
+permalink: /noticias/index.html
+tags: paginas
+crumbs: []
+crumbTitulo: Notícias
+description: Notícias, comunicados oficiais, avisos de atendimento e editais da Secretaria de Meio Ambiente de Frutal.
+scripts: ["/assets/js/filtros.js"]
+---
+{%- from "components/macros.njk" import icon, cardNoticia -%}
+<div class="filtros" data-filtro="noticias" data-pagina="6">
+  <div class="campo"><label for="n-q">Buscar nas notícias</label><input type="search" id="n-q" data-f="q" autocomplete="off"></div>
+  <div class="campo"><label for="n-cat">Categoria</label>
+    <select id="n-cat" data-f="categoria"><option value="">Todas</option><option value="noticia">Notícias</option><option value="comunicado">Comunicados oficiais</option><option value="aviso">Avisos de atendimento</option><option value="edital">Editais</option></select></div>
+  <div class="campo"><label for="n-de">A partir de</label><input type="date" id="n-de" data-f="de"></div>
+  <div class="campo"><label for="n-ate">Até</label><input type="date" id="n-ate" data-f="ate"></div>
+</div>
+<p class="contador" data-contador role="status" aria-live="polite"></p>
+<div class="grid grid-3" data-lista>
+  {%- for n in collections.noticias %}
+  <div data-item data-categoria="{{ n.data.categoria }}" data-data="{{ n.date | dataISO }}" data-texto="{{ (n.data.title + ' ' + n.data.resumo) | lower }}">{{ cardNoticia(n, 2) }}</div>
+  {%- endfor %}
+</div>
+<div class="sem-resultados" data-vazio hidden><p><strong>Nenhuma notícia encontrada.</strong></p><p>Mude os filtros ou limpe a busca.</p></div>
+<div class="paginacao"><button type="button" class="btn btn-terciario btn-grande" data-mais hidden>Carregar mais notícias</button></div>
+
+<section class="secao-info" style="margin-top:3rem;padding:1.5rem;border-radius:.5rem" aria-labelledby="h-news">
+  <h2 id="h-news" style="margin-top:0">Receba novidades por e-mail</h2>
+  <p>Enviaremos notícias e avisos da Secretaria. Você pode cancelar quando quiser.</p>
+  <form class="form" method="post" action="/api/newsletter" data-tipo="newsletter" novalidate>
+    <div class="resumo-erros" id="resumo-erros" role="alert" tabindex="-1" hidden></div>
+    <div class="armadilha" aria-hidden="true"><label for="website">Não preencha este campo</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+    <input type="hidden" name="_t" value="">
+    {%- from "forms/campos.njk" import campo -%}
+    {{ campo("email", "Seu e-mail", "email", true, "", 'autocomplete="email" maxlength="160"') }}
+    <div class="campo" data-campo>
+      <div class="opcao"><input type="checkbox" id="consentimento" name="consentimento" value="sim" required aria-describedby="consentimento-erro"><label for="consentimento">Concordo em receber e-mails da Secretaria e em ter meu e-mail guardado para esse fim, conforme a <a href="/privacidade/">Política de privacidade</a>. <span class="obrigatorio" aria-hidden="true">*</span></label></div>
+      <p class="erro-campo" id="consentimento-erro" hidden></p>
+    </div>
+    <div><button type="submit" class="btn btn-primario">Assinar newsletter</button></div>
+    <div id="confirmacao" class="alerta alerta-sucesso" tabindex="-1" role="status" hidden>{{ icon("check-circle") }}<div><span class="alerta-titulo">Inscrição recebida</span><span id="msg-confirmacao"></span></div></div>
+  </form>
+</section>

@@ -1,0 +1,85 @@
+---
+layout: layouts/pagina.njk
+title: Calendário ambiental
+lead: Campanhas, eventos, datas ambientais e prazos de serviços. Adicione ao seu calendário para não perder.
+permalink: /calendario/index.html
+tags: paginas
+crumbs: []
+crumbTitulo: Calendário ambiental
+description: Calendário de campanhas, eventos, datas ambientais e prazos da Secretaria de Meio Ambiente de Frutal.
+scripts: ["/assets/js/calendario.js"]
+---
+{%- from "components/macros.njk" import icon -%}
+{%- set proximos = collections.eventosTodos | aPartirDe(buildDate) -%}
+<section aria-labelledby="h-dest">
+  <h2 id="h-dest" style="margin-top:0">Em destaque</h2>
+  <div class="grid grid-2">
+    {%- for e in collections.eventosTodos %}{% if e.destaque and e.data >= (buildDate | dataISO) %}
+    <article class="card" style="border-left:.5rem solid var(--c-primary)">
+      <span class="badge badge-azul">{{ "Semana da Água" if e.destaque == "agua" else "Semana do Meio Ambiente" }}</span>
+      <h3>{{ e.titulo }}</h3>
+      <p class="meta"><span>{{ icon("calendar", "icon-sm") }} <time datetime="{{ e.data }}">{{ e.data | dataBR }}</time>{% if e.dataFim %} a <time datetime="{{ e.dataFim }}">{{ e.dataFim | dataBR }}</time>{% endif %}</span></p>
+      <p>{{ e.descricao }}</p>
+    </article>
+    {%- endif %}{% endfor %}
+  </div>
+</section>
+
+<section aria-labelledby="h-cal">
+  <h2 id="h-cal">Todas as datas</h2>
+  <div class="filtros" data-cal-filtros>
+    <div class="campo"><label for="cal-tipo">Tipo</label>
+      <select id="cal-tipo"><option value="">Todos</option><option value="campanha">Campanha</option><option value="evento">Evento</option><option value="data">Data comemorativa</option><option value="prazo">Prazo de serviço</option></select></div>
+    <div class="campo" id="cal-modo-box" hidden><span id="cal-modo-rotulo" class="obrigatorio" style="color:inherit;font-weight:700">Visualização</span>
+      <div class="acoes" role="group" aria-labelledby="cal-modo-rotulo">
+        <button type="button" class="btn btn-terciario" id="modo-lista" aria-pressed="true">Lista</button>
+        <button type="button" class="btn btn-terciario" id="modo-mes" aria-pressed="false">Mês</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="visao-mes" hidden>
+    <div class="cal-ferramentas">
+      <div class="cal-nav">
+        <button type="button" class="btn btn-terciario" id="mes-ant" aria-label="Mês anterior">{{ icon("chevron-left") }}</button>
+        <h3 id="mes-titulo" style="margin:0" aria-live="polite"></h3>
+        <button type="button" class="btn btn-terciario" id="mes-prox" aria-label="Próximo mês">{{ icon("chevron-right") }}</button>
+      </div>
+      <button type="button" class="btn btn-terciario" id="mes-hoje">Hoje</button>
+    </div>
+    <div class="tabela-wrap"><table class="cal-tabela" id="cal-tabela"><caption class="sr-only">Calendário do mês com eventos</caption>
+      <thead><tr><th scope="col" abbr="Domingo">Dom</th><th scope="col" abbr="Segunda">Seg</th><th scope="col" abbr="Terça">Ter</th><th scope="col" abbr="Quarta">Qua</th><th scope="col" abbr="Quinta">Qui</th><th scope="col" abbr="Sexta">Sex</th><th scope="col" abbr="Sábado">Sáb</th></tr></thead>
+      <tbody></tbody></table></div>
+    <ul class="legenda" aria-label="Legenda de cores">
+      <li><span class="badge">Evento</span></li><li><span class="badge badge-azul">Campanha</span></li><li><span class="badge badge-aviso">Data comemorativa</span></li><li><span class="badge badge-cinza">Prazo de serviço</span></li>
+    </ul>
+    <p class="pequeno suave">Selecione um evento no calendário para ver os detalhes. A visualização em lista traz as mesmas informações em texto.</p>
+  </div>
+
+  <div id="visao-lista">
+    <p class="contador" id="cal-contador" role="status" aria-live="polite"></p>
+    <ul class="lista-limpa" id="cal-lista">
+      {%- for e in proximos %}
+      <li class="evento-item" data-evento data-tipo="{{ e.tipo }}">
+        <div class="data-caixa" aria-hidden="true"><span class="dia">{{ e.data | diaMes }}</span><span class="mes">{{ e.data | mesCurto }}</span></div>
+        <div>
+          <h3 style="margin:0;font-size:1.125rem">{{ e.titulo }}</h3>
+          <p class="meta" style="margin:.25rem 0"><span class="badge badge-cinza">{{ e.tipo | tipoLabel }}</span>
+            <time datetime="{{ e.data }}">{{ e.data | dataLonga }}</time>{% if e.dataFim %} a <time datetime="{{ e.dataFim }}">{{ e.dataFim | dataLonga }}</time>{% endif %}
+            {% if e.hora %}<span>{{ icon("clock", "icon-sm") }} {{ e.hora }}</span>{% endif %}
+            {% if e.local %}<span>{{ icon("map-pin", "icon-sm") }} {{ e.local }}</span>{% endif %}</p>
+          <p style="margin:0 0 .5rem">{{ e.descricao }}</p>
+          <p style="margin:0"><button type="button" class="btn btn-terciario js-add-cal" data-titulo="{{ e.titulo }}" data-data="{{ e.data }}" data-fim="{{ e.dataFim }}" data-local="{{ e.local }}" data-descricao="{{ e.descricao }}" hidden>{{ icon("calendar") }} Adicionar ao calendário</button></p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<dialog class="dialogo" id="cal-dialogo" aria-labelledby="dlg-titulo">
+  <h2 id="dlg-titulo" style="margin-top:0"></h2>
+  <p class="meta" id="dlg-meta"></p>
+  <p id="dlg-desc"></p>
+  <div class="acoes"><button type="button" class="btn btn-secundario" id="dlg-ics">{{ icon("download") }} Arquivo .ics</button><a class="btn btn-terciario" id="dlg-google" target="_blank" rel="noopener">Google Agenda<span class="sr-only"> (abre em nova aba)</span></a><button type="button" class="btn btn-primario" id="dlg-fechar">Fechar</button></div>
+</dialog>

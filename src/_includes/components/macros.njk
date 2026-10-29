@@ -1,0 +1,39 @@
+{% macro icon(nome, classe="") %}<svg class="icon {{ classe }}" aria-hidden="true" focusable="false"><use href="#i-{{ nome }}"/></svg>{% endmacro %}
+
+{% macro cardNoticia(n, nivel=3) %}
+<article class="card card-link{{ ' destaque-oficial' if n.data.categoria == 'comunicado' }}">
+  {% if n.data.imagem %}<div class="card-img"><img src="{{ n.data.imagem }}" alt="{{ n.data.alt }}" loading="lazy" width="800" height="450"></div>{% endif %}
+  <div class="meta">
+    <span class="badge {{ 'badge-oficial' if n.data.categoria == 'comunicado' else 'badge-azul' }}">{{ n.data.categoria | catLabel }}</span>
+    <time datetime="{{ n.date | dataISO }}">{{ n.date | dataBR }}</time>
+    {% if n.data.numero %}<span>Nº {{ n.data.numero }}</span>{% endif %}
+  </div>
+  <h{{ nivel }}><a href="{{ n.url }}">{{ n.data.title }}</a></h{{ nivel }}>
+  <p>{{ n.data.resumo }}</p>
+  <span class="mais" aria-hidden="true">Ler mais {{ icon("arrow-right", "icon-sm") }}</span>
+</article>
+{% endmacro %}
+
+{% macro eventoItem(e) %}
+<li class="evento-item">
+  <div class="data-caixa" aria-hidden="true"><span class="dia">{{ e.data | diaMes }}</span><span class="mes">{{ e.data | mesCurto }}</span></div>
+  <div>
+    <h3 style="margin:0;font-size:1.125rem">{{ e.titulo }}</h3>
+    <p class="meta" style="margin:.25rem 0">
+      <span class="badge badge-cinza">{{ e.tipo | tipoLabel }}</span>
+      <time datetime="{{ e.data }}">{{ e.data | dataLonga }}</time>
+      {% if e.hora %}<span>{{ icon("clock", "icon-sm") }} {{ e.hora }}</span>{% endif %}
+      {% if e.local %}<span>{{ icon("map-pin", "icon-sm") }} {{ e.local }}</span>{% endif %}
+    </p>
+  </div>
+</li>
+{% endmacro %}
+
+{% macro cardServico(s, nivel=3) %}
+<article class="card card-link">
+  <span class="icone-fundo">{{ icon(s.data.icone or "file") }}</span>
+  <h{{ nivel }}><a href="{{ s.url }}">{{ s.data.title }}</a></h{{ nivel }}>
+  <p>{{ s.data.resumo }}</p>
+  <span class="mais" aria-hidden="true">Ver como solicitar {{ icon("arrow-right", "icon-sm") }}</span>
+</article>
+{% endmacro %}

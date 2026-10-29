@@ -1,0 +1,22 @@
+{
+  "principal": [
+    { "titulo": "Início", "url": "/" },
+    { "titulo": "Sobre a Secretaria", "url": "/sobre/" },
+    { "titulo": "Serviços", "url": "/servicos/" },
+    { "titulo": "Projetos e Ações", "url": "/projetos/" },
+    { "titulo": "Notícias", "url": "/noticias/" },
+    { "titulo": "Calendário Ambiental", "url": "/calendario/" },
+    { "titulo": "Transparência e Documentos", "url": "/transparencia/" }
+  ],
+  "contato": { "titulo": "Contato", "url": "/contato/" },
+  "rodapeLinks": [
+    { "titulo": "Prefeitura de Frutal", "url": "https://www.frutal.mg.gov.br" },
+    { "titulo": "Câmara Municipal de Frutal", "url": "[●]" },
+    { "titulo": "Portal da Transparência", "url": "[●]" },
+    { "titulo": "e-SIC (Acesso à Informação)", "url": "/transparencia/acesso-a-informacao/" },
+    { "titulo": "Diário Oficial do Município", "url": "[●]" },
+    { "titulo": "IEF-MG (Instituto Estadual de Florestas)", "url": "https://www.ief.mg.gov.br" },
+    { "titulo": "IBAMA", "url": "https://www.gov.br/ibama" },
+    { "titulo": "ANA (Agência Nacional de Águas)", "url": "https://www.gov.br/ana" }
+  ]
+}

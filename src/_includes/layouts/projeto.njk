@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="page-hero">
+  <div class="container">
+    <p class="meta"><span class="badge {{ 'badge-aviso' if status == 'planejado' else ('badge-cinza' if status == 'concluido' else '') }}">{{ status | statusLabel }}</span><span>{{ area }}</span></p>
+    <h1>{{ title }}</h1>
+    <p>{{ resumo }}</p>
+  </div>
+</div>
+<div class="container secao">
+  <div class="ficha">
+    <section class="ficha-item" aria-labelledby="p-obj"><h2 id="p-obj">{{ icon("leaf") }} Objetivo</h2><p>{{ objetivo }}</p></section>
+    <section class="ficha-item" aria-labelledby="p-pub"><h2 id="p-pub">{{ icon("users") }} Público beneficiado</h2><p>{{ publico }}</p></section>
+    <section class="ficha-item" aria-labelledby="p-per"><h2 id="p-per">{{ icon("calendar") }} Período</h2><p>{{ periodo }}</p></section>
+    <section class="ficha-item" aria-labelledby="p-resp"><h2 id="p-resp">{{ icon("building") }} Responsável</h2><p>{{ responsavel }}</p></section>
+  </div>
+  <section aria-labelledby="p-res"><h2 id="p-res">Resultados</h2><div class="texto"><p>{{ resultados }}</p>{{ content | safe }}</div></section>
+  <section aria-labelledby="p-gal">
+    <h2 id="p-gal">Galeria de fotos</h2>
+    <ul class="galeria">
+      {%- for i in range(0, 3) %}<li><figure><img src="/assets/img/foto-exemplo.svg" alt="Espaço reservado para foto do projeto “{{ title }}” (imagem de exemplo)" loading="lazy" width="800" height="450"><figcaption class="pequeno suave">Foto {{ i + 1 }} [●]</figcaption></figure></li>{% endfor %}
+    </ul>
+  </section>
+  <section aria-labelledby="p-docs">
+    <h2 id="p-docs">Documentos relacionados</h2>
+    <p>Relatórios e planos deste projeto ficam na <a href="/transparencia/documentos/">biblioteca de documentos</a> [●].</p>
+  </section>
+  <p class="fixar-topo"><a class="btn btn-terciario" href="/projetos/">{{ icon("chevron-left") }} Voltar aos projetos</a></p>
+</div>

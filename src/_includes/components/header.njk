@@ -1,0 +1,30 @@
+{%- from "components/macros.njk" import icon -%}
+<header class="site-header" role="banner">
+  <div class="container">
+    <a class="marca" href="/">
+      <span class="marca-logo" aria-hidden="true">{{ icon("leaf") }}</span>
+      <span class="marca-texto"><small>Prefeitura de {{ site.municipio }}</small><strong>Secretaria de Meio Ambiente</strong></span>
+    </a>
+    <button class="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+      <span class="icon-abrir">{{ icon("menu") }}</span><span class="icon-fechar">{{ icon("close") }}</span> Menu
+    </button>
+    <div class="busca-topo no-print">
+      <form class="busca-form" role="search" aria-label="Busca no site" action="/busca/" method="get">
+        <label class="sr-only" for="busca-q">Buscar no site</label>
+        <input type="search" id="busca-q" name="q" placeholder="Buscar no site" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="busca-sugestoes" aria-autocomplete="list">
+        <button type="submit" aria-label="Buscar">{{ icon("search") }}</button>
+      </form>
+      <ul class="sugestoes" id="busca-sugestoes" role="listbox" aria-label="Sugestões de busca" hidden></ul>
+      <p class="sr-only" id="busca-status" role="status" aria-live="polite"></p>
+    </div>
+    <nav class="nav-principal" id="menu-principal" aria-label="Menu principal">
+      <ul>
+        {%- for item in navegacao.principal %}
+        {%- set ativo = (page.url == item.url) or (item.url != "/" and page.url.startsWith(item.url)) %}
+        <li><a href="{{ item.url }}"{% if ativo %} aria-current="page"{% endif %}>{{ item.titulo }}</a></li>
+        {%- endfor %}
+        <li><a class="nav-contato" href="{{ navegacao.contato.url }}"{% if page.url.startsWith(navegacao.contato.url) %} aria-current="page"{% endif %}>{{ navegacao.contato.titulo }}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

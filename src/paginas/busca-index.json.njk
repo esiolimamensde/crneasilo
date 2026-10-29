@@ -1,0 +1,12 @@
+---
+permalink: /busca-index.json
+eleventyExcludeFromCollections: true
+---
+{%- set itens = [] -%}
+{%- for s in collections.servicos %}{% set itens = (itens.push({ tipo: "servico", titulo: s.data.title, url: s.url, resumo: s.data.resumo, palavras: s.data.categoria }), itens) %}{% endfor -%}
+{%- for n in collections.noticias %}{% set itens = (itens.push({ tipo: "noticia", titulo: n.data.title, url: n.url, resumo: n.data.resumo, palavras: n.data.categoria | catLabel }), itens) %}{% endfor -%}
+{%- for p in collections.projetos %}{% set itens = (itens.push({ tipo: "projeto", titulo: p.data.title, url: p.url, resumo: p.data.resumo, palavras: p.data.area }), itens) %}{% endfor -%}
+{%- for d in collections.documentos %}{% set itens = (itens.push({ tipo: "documento", titulo: d.data.title, url: "/transparencia/documentos/?q=" + (d.data.title | urlencode), resumo: d.data.tipo + " — " + (d.data.orgao or ""), palavras: d.data.tipo }), itens) %}{% endfor -%}
+{%- for e in collections.eventosTodos | aPartirDe(buildDate) | limit(40) %}{% set itens = (itens.push({ tipo: "evento", titulo: e.titulo, url: "/calendario/", resumo: (e.data | dataBR) + " — " + e.descricao, palavras: e.tipo | tipoLabel }), itens) %}{% endfor -%}
+{%- for p in collections.paginas %}{% set itens = (itens.push({ tipo: "pagina", titulo: p.data.title, url: p.url, resumo: p.data.description or p.data.lead, palavras: "" }), itens) %}{% endfor -%}
+{{ itens | json | safe }}

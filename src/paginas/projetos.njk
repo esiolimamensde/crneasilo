@@ -1,0 +1,39 @@
+---
+layout: layouts/pagina.njk
+title: Projetos e ações
+lead: Conheça o que a Secretaria faz pela natureza de Frutal e como você pode participar.
+permalink: /projetos/index.html
+tags: paginas
+crumbs: []
+crumbTitulo: Projetos e ações
+description: "Projetos e ações ambientais de Frutal: nascentes, arborização, educação ambiental, coleta seletiva e monitoramento."
+scripts: ["/assets/js/filtros.js"]
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="filtros" data-filtro="projetos">
+  <div class="campo"><label for="p-q">Buscar projeto</label><input type="search" id="p-q" data-f="q" autocomplete="off"></div>
+  <div class="campo"><label for="p-st">Situação</label><select id="p-st" data-f="status"><option value="">Todas</option><option value="andamento">Em andamento</option><option value="concluido">Concluído</option><option value="planejado">Planejado</option></select></div>
+</div>
+<p class="contador" data-contador role="status" aria-live="polite"></p>
+<div class="grid grid-3" data-lista>
+  {%- for p in collections.projetos %}
+  <div data-item data-status="{{ p.data.status }}" data-texto="{{ (p.data.title + ' ' + p.data.resumo + ' ' + p.data.area) | lower }}">
+    <article class="card card-link" style="height:100%">
+      <p class="meta" style="margin:0"><span class="badge {{ 'badge-aviso' if p.data.status == 'planejado' else ('badge-cinza' if p.data.status == 'concluido' else '') }}">{{ p.data.status | statusLabel }}</span><span>{{ p.data.area }}</span></p>
+      <h2><a href="{{ p.url }}">{{ p.data.title }}</a></h2>
+      <p>{{ p.data.resumo }}</p>
+      <p class="pequeno suave" style="margin:0">Período: {{ p.data.periodo }}<br>Responsável: {{ p.data.responsavel }}</p>
+      <span class="mais" aria-hidden="true">Ver projeto {{ icon("arrow-right", "icon-sm") }}</span>
+    </article>
+  </div>
+  {%- endfor %}
+</div>
+<div class="sem-resultados" data-vazio hidden><p><strong>Nenhum projeto encontrado.</strong></p></div>
+
+<section aria-labelledby="h-parc" style="margin-top:3rem">
+  <h2 id="h-parc">Parceiros</h2>
+  <ul class="grid grid-4 lista-limpa" style="display:grid">
+    {%- for p in parceiros %}<li class="card" style="text-align:center;min-height:5.5rem;justify-content:center">{% if p.url %}<a href="{{ p.url }}" rel="noopener">{{ p.nome }}</a>{% else %}{{ p.nome }}{% endif %}<span class="pequeno suave">Logotipo [●]</span></li>{% endfor %}
+  </ul>
+  <p class="fixar-topo">Sua ONG, empresa ou universidade quer ajudar? <a class="btn btn-primario" href="/contato/?assunto=parceria">Enviar proposta de parceria</a></p>
+</section>

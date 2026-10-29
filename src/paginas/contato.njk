@@ -1,0 +1,57 @@
+---
+layout: layouts/pagina.njk
+title: Contato
+lead: Fale com a Secretaria de Meio Ambiente. Responderemos o mais rápido possível.
+permalink: /contato/index.html
+tags: paginas
+crumbs: []
+description: Telefone, WhatsApp, e-mail, endereço, horário e formulário de contato da Secretaria de Meio Ambiente de Frutal.
+scripts: ["/assets/js/forms.js"]
+---
+{%- from "components/macros.njk" import icon -%}
+{%- from "forms/campos.njk" import campo, texto, lista, arquivos, consentimento, blocoControle -%}
+<div class="grid grid-2" style="align-items:start">
+  <section aria-labelledby="h-form">
+    <h2 id="h-form" style="margin-top:0">Envie uma mensagem</h2>
+    <p>Os campos marcados com <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+    <form class="form" id="form-principal" method="post" action="/api/contato" enctype="multipart/form-data" novalidate data-tipo="contato">
+      {{ blocoControle("contato") }}
+      {{ campo("nome", "Nome completo", "text", true, "", 'autocomplete="name" maxlength="120"') }}
+      {{ campo("email", "E-mail", "email", true, "Usaremos para responder e enviar o protocolo.", 'autocomplete="email" maxlength="160"') }}
+      {{ campo("telefone", "Telefone com DDD", "tel", false, "Exemplo: (34) 99999-0000", 'autocomplete="tel" inputmode="tel" maxlength="20"') }}
+      {{ lista("assunto", "Assunto", [
+        {v:"duvida", t:"Dúvida"}, {v:"sugestao", t:"Sugestão"}, {v:"elogio", t:"Elogio"}, {v:"reclamacao", t:"Reclamação"},
+        {v:"parceria", t:"Proposta de parceria"}, {v:"imprensa", t:"Imprensa"}, {v:"acessibilidade", t:"Problema de acessibilidade no site"}, {v:"outro", t:"Outro"}
+      ]) }}
+      {{ texto("mensagem", "Mensagem", true, "Escreva com suas palavras. Para denúncias, use o canal de denúncias.", 'maxlength="3000"') }}
+      {{ arquivos("anexo", "Anexo", "Um arquivo (PDF, JPG ou PNG) de até 5 MB.", false) }}
+      {{ consentimento() }}
+      <div><button type="submit" class="btn btn-primario btn-grande">Enviar mensagem</button></div>
+    </form>
+    <div id="confirmacao" class="alerta alerta-sucesso" tabindex="-1" role="status" hidden>
+      {{ icon("check-circle") }}
+      <div><span class="alerta-titulo">Mensagem enviada</span><p>Seu número de protocolo:</p><p><span class="protocolo-caixa" id="numero-protocolo"></span></p><p id="msg-confirmacao"></p></div>
+    </div>
+    <div class="alerta alerta-info" style="margin-top:1.5rem">{{ icon("shield") }}<div><span class="alerta-titulo">Seus dados e a LGPD</span>Usamos seus dados só para responder esta mensagem, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018). Veja a <a href="/privacidade/">Política de privacidade</a>.</div></div>
+  </section>
+
+  <section aria-labelledby="h-canais">
+    <h2 id="h-canais" style="margin-top:0">Canais de atendimento</h2>
+    <ul class="lista-limpa">
+      <li class="card">{{ icon("phone") }}<strong>Telefone</strong><span>{{ site.telefone }}</span></li>
+      <li class="card">{{ icon("alert") }}<strong>Telefone de emergência ambiental</strong><span>{{ site.telefoneEmergencia }}</span></li>
+      <li class="card">{{ icon("send") }}<strong>WhatsApp</strong><span>{{ site.whatsapp }}</span></li>
+      <li class="card">{{ icon("mail") }}<strong>E-mail</strong><span>{{ site.email }}</span></li>
+      <li class="card">{{ icon("map-pin") }}<strong>Endereço</strong><span>{{ site.endereco }}</span></li>
+      <li class="card">{{ icon("clock") }}<strong>Horário de atendimento</strong><span>{{ site.horario }}</span></li>
+    </ul>
+    <h2>Como chegar</h2>
+    <div class="mapa" id="mapa-sede">
+      <div>
+        <p><strong>Mapa da sede</strong></p>
+        <p>Endereço em texto: {{ site.endereco }}.</p>
+        <p class="pequeno suave">O mapa interativo será exibido quando o endereço oficial for informado [●]. Por privacidade, ele só carrega quando você pedir.</p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,26 @@
+---
+layout: layouts/pagina.njk
+title: Transparência e documentos
+lead: Informação pública é direito de todos. Aqui você acessa documentos, pede informações e acompanha a gestão.
+permalink: /transparencia/index.html
+tags: paginas
+crumbs: []
+crumbTitulo: Transparência e documentos
+description: Acesso à informação, biblioteca de documentos, planos, relatórios e atas da Secretaria de Meio Ambiente de Frutal.
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="grid grid-2">
+  <article class="card card-link"><span class="icone-fundo">{{ icon("info") }}</span><h2><a href="/transparencia/acesso-a-informacao/">Acesso à informação (e-SIC)</a></h2><p>Saiba como pedir uma informação pública, os prazos e como recorrer.</p><span class="mais" aria-hidden="true">Ver como pedir {{ icon("arrow-right", "icon-sm") }}</span></article>
+  <article class="card card-link"><span class="icone-fundo">{{ icon("file") }}</span><h2><a href="/transparencia/documentos/">Documentos e publicações</a></h2><p>Leis, decretos, portarias, planos, relatórios, editais e atas, com busca e filtros.</p><span class="mais" aria-hidden="true">Abrir biblioteca {{ icon("arrow-right", "icon-sm") }}</span></article>
+</div>
+
+<h2>Informações oficiais</h2>
+<ul class="lista-limpa">
+  <li class="card"><strong>Orçamento e execução</strong><span>[●] Link ou documento.</span></li>
+  <li class="card"><strong>Contratos e convênios</strong><span>[●] Link ou documento.</span></li>
+  <li class="card"><strong>Licitações e editais</strong><span>[●] Link ou documento. Editais da Secretaria: <a href="/transparencia/documentos/?tipo=edital">ver na biblioteca</a>.</span></li>
+  <li class="card"><strong>Relatórios de gestão</strong><span><a href="/transparencia/documentos/?tipo=relatorio">Ver na biblioteca</a>.</span></li>
+  <li class="card"><strong>Planos municipais</strong><span>Saneamento, arborização e resíduos: <a href="/transparencia/documentos/?tipo=plano">ver na biblioteca</a>.</span></li>
+  <li class="card"><strong>Atas do Conselho Municipal de Meio Ambiente</strong><span><a href="/transparencia/documentos/?tipo=ata">Ver na biblioteca</a>.</span></li>
+  <li class="card"><strong>Portal da Transparência da Prefeitura</strong><span>[●] Link oficial.</span></li>
+</ul>

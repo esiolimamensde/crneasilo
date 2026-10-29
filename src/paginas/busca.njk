@@ -1,0 +1,20 @@
+---
+layout: layouts/pagina.njk
+title: Busca
+lead: Encontre serviços, notícias, documentos, projetos e eventos.
+permalink: /busca/index.html
+crumbs: []
+noindex: true
+description: Busca no site da Secretaria de Meio Ambiente de Frutal.
+---
+{%- from "components/macros.njk" import icon -%}
+<form class="filtros" id="form-busca-pagina" role="search" aria-label="Busca de conteúdo">
+  <div class="campo"><label for="q-pagina">O que você procura?</label><input type="search" id="q-pagina" name="q" autocomplete="off"></div>
+  <div class="campo"><label for="tipo-busca">Tipo de conteúdo</label>
+    <select id="tipo-busca"><option value="">Tudo</option><option value="servico">Serviços</option><option value="noticia">Notícias</option><option value="documento">Documentos</option><option value="projeto">Projetos</option><option value="evento">Eventos</option><option value="pagina">Páginas</option></select></div>
+  <div><button class="btn btn-primario" type="submit">{{ icon("search") }} Buscar</button></div>
+</form>
+<p class="contador" id="resumo-busca" role="status" aria-live="polite"></p>
+<ul class="lista-limpa" id="resultados"></ul>
+<noscript><p>A busca precisa de JavaScript. Use o <a href="/mapa-do-site/">mapa do site</a> para navegar.</p></noscript>
+<script src="/assets/js/busca.js" defer></script>

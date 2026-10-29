@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="container secao">
+  <article class="artigo">
+    <p class="meta">
+      <span class="badge {{ 'badge-oficial' if categoria == 'comunicado' else 'badge-azul' }}">{{ categoria | catLabel }}</span>
+      <time datetime="{{ page.date | dataISO }}">{{ page.date | dataLonga }}</time>
+      {% if numero %}<span>Publicação nº {{ numero }}</span>{% endif %}
+    </p>
+    <h1>{{ title }}</h1>
+    <p class="suave" style="font-size:1.1875rem">{{ resumo }}</p>
+    {% if imagem %}<figure class="imagem-destaque"><img src="{{ imagem }}" alt="{{ alt }}" width="800" height="450">{% if credito %}<figcaption>{{ credito }}</figcaption>{% endif %}</figure>{% endif %}
+    <div class="texto">{{ content | safe }}</div>
+    <p class="fixar-topo"><a class="btn btn-terciario" href="/noticias/">{{ icon("chevron-left") }} Voltar às notícias</a></p>
+  </article>
+</div>

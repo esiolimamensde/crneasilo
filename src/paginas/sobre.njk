@@ -1,0 +1,93 @@
+---
+layout: layouts/pagina.njk
+title: Sobre a Secretaria
+lead: Conheça quem somos, o que fazemos e como a Secretaria está organizada.
+permalink: /sobre/index.html
+tags: paginas
+crumbs: []
+description: Histórico, missão, visão, valores, competências, equipe e Conselho Municipal de Meio Ambiente de Frutal.
+---
+{%- from "components/macros.njk" import icon -%}
+<section aria-labelledby="h-apres">
+  <h2 id="h-apres" style="margin-top:0">Apresentação</h2>
+  <p>A {{ site.nomeCompleto }} cuida da proteção dos rios, nascentes, matas e áreas verdes do município, orienta o cidadão e fiscaliza atividades que podem causar impacto ao meio ambiente.</p>
+  <p><strong>Histórico:</strong> [●] A Secretaria deve enviar o histórico oficial.</p>
+  <p><strong>Base legal de criação:</strong> [●] (lei ou decreto municipal).</p>
+  <p><strong>Estrutura:</strong> [●] Setores e subordinação conforme o organograma abaixo.</p>
+</section>
+
+<section aria-labelledby="h-mvv">
+  <h2 id="h-mvv">Missão, visão e valores</h2>
+  <div class="grid grid-2">
+    <article class="card"><span class="icone-fundo">{{ icon("leaf") }}</span><h3>Missão</h3><p>{{ missao.missao }}</p></article>
+    <article class="card"><span class="icone-fundo">{{ icon("tree") }}</span><h3>Visão</h3><p>{{ missao.visao }}</p></article>
+  </div>
+  <h3 id="valores">Valores</h3>
+  <ul>{% for v in missao.valores %}<li>{{ v }}</li>{% endfor %}</ul>
+  <p class="pequeno suave">{{ missao.nota }}</p>
+</section>
+
+<section aria-labelledby="h-comp">
+  <h2 id="h-comp">O que a Secretaria faz (competências)</h2>
+  <ul>
+    <li><strong>Fiscalização:</strong> verifica denúncias e atividades que possam prejudicar o meio ambiente.</li>
+    <li><strong>Licenciamento:</strong> analisa e emite licenças e autorizações ambientais de competência do município [●].</li>
+    <li><strong>Arborização:</strong> planta, poda e cuida das árvores de ruas e praças.</li>
+    <li><strong>Educação ambiental:</strong> realiza palestras, campanhas e visitas em escolas e bairros.</li>
+    <li><strong>Gestão de resíduos:</strong> organiza coleta seletiva, ecopontos e destinação correta do lixo [●].</li>
+    <li><strong>Proteção de nascentes:</strong> recupera e protege nascentes, matas ciliares e Áreas de Preservação Permanente (APP).</li>
+    <li><strong>Proteção animal:</strong> recebe denúncias de maus-tratos e orienta sobre posse responsável [●].</li>
+  </ul>
+</section>
+
+<section aria-labelledby="h-org">
+  <h2 id="h-org">Organograma (em lista)</h2>
+  <p>Estrutura em formato de texto, para leitura por qualquer pessoa e por leitores de tela. O organograma oficial em imagem será anexado quando enviado [●].</p>
+  <ul class="org">
+    <li><strong>Secretário(a) Municipal de Meio Ambiente</strong>
+      <ul>
+        {%- for s in equipe.setores %}{% if s.setor != "Gabinete" %}
+        <li>{{ s.setor }}<ul>{% for m in s.membros %}<li>{{ m.cargo }}</li>{% endfor %}</ul></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section aria-labelledby="h-equipe">
+  <h2 id="h-equipe">Nossa equipe</h2>
+  <p class="pequeno suave">{{ equipe.nota }} Quem não quiser aparecer na foto pode pedir para ocultá-la.</p>
+  {%- for s in equipe.setores %}
+  <h3>{{ s.setor }}</h3>
+  <div class="grid grid-3">
+    {%- for m in s.membros %}
+    <article class="card pessoa">
+      {%- if not m.ocultarFoto %}<div class="pessoa-foto">{% if m.foto %}<img src="{{ m.foto }}" alt="Foto de {{ m.nome }}" loading="lazy">{% else %}{{ icon("users", "icon-lg") }}{% endif %}</div>{% endif %}
+      <h4 style="margin:0">{{ m.nome }}</h4>
+      <p class="suave" style="margin:0">{{ m.cargo }}</p>
+      <p class="pequeno suave" style="margin:0">Setor: {{ s.setor }}</p>
+    </article>
+    {%- endfor %}
+  </div>
+  {%- endfor %}
+</section>
+
+<section aria-labelledby="h-conselho">
+  <h2 id="h-conselho">Conselho Municipal de Meio Ambiente</h2>
+  <p>{{ conselho.descricao }}</p>
+  <h3>Composição</h3>
+  <div class="tabela-wrap"><table class="tabela tabela-cards">
+    <caption class="sr-only">Composição do Conselho Municipal de Meio Ambiente</caption>
+    <thead><tr><th scope="col">Segmento</th><th scope="col">Representantes</th></tr></thead>
+    <tbody>{% for c in conselho.composicao %}<tr><td data-rotulo="Segmento">{{ c.segmento }}</td><td data-rotulo="Representantes">{{ c.representantes }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  <h3>Reuniões e atas</h3>
+  <p>{{ conselho.reunioes }}</p>
+  <p><a class="btn btn-terciario" href="/transparencia/documentos/?tipo=ata">Ver atas do Conselho</a></p>
+</section>
+
+<section aria-labelledby="h-contato">
+  <h2 id="h-contato">Contatos e endereço</h2>
+  <p>Endereço: {{ site.endereco }}<br>Telefone: {{ site.telefone }}<br>E-mail: {{ site.email }}<br>Horário: {{ site.horario }}</p>
+  <p><a class="btn btn-primario" href="/contato/">Ver todos os canais de contato</a></p>
+</section>

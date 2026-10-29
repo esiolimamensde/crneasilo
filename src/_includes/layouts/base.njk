@@ -1,0 +1,68 @@
+{%- from "components/macros.njk" import icon -%}
+{%- set tituloPagina = (title + " — " + site.nome) if (title and page.url != "/") else (site.nomeCompleto + " | " + site.municipio + " (" + site.uf + ")") -%}
+{%- set desc = description or site.descricao -%}
+{%- set urlCanonica = site.url + page.url -%}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ tituloPagina }}</title>
+  <meta name="description" content="{{ desc }}">
+  {% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  <link rel="canonical" href="{{ urlCanonica }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{ site.nomeCompleto }}">
+  <meta property="og:title" content="{{ tituloPagina }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:url" content="{{ urlCanonica }}">
+  <meta property="og:image" content="{{ site.url }}{{ ogImage or '/assets/img/hero-frutal.svg' }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="api-base" content="{{ apiBase or '' }}">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/alto-contraste.css">
+  {% for css in estilos %}<link rel="stylesheet" href="{{ css }}">{% endfor %}
+  <script>
+    /* Aplica preferências de acessibilidade antes da pintura (evita "piscar") */
+    document.documentElement.classList.add("js");
+    try {
+      var p = JSON.parse(localStorage.getItem("smma-a11y") || "{}"), h = document.documentElement;
+      if (p.contraste) h.classList.add("alto-contraste");
+      if (p.fonte) h.classList.add("fs-" + p.fonte);
+    } catch (e) {}
+  </script>
+</head>
+<body class="{{ 'tem-cta-fixo' if ctaFixo }}">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  {% include "components/sprite.njk" %}
+  {% include "components/utilbar.njk" %}
+  {% include "components/header.njk" %}
+  {% if crumbs and page.url != "/" %}{% include "components/breadcrumb.njk" %}{% endif %}
+  <main id="conteudo" tabindex="-1">
+{{ content | safe }}
+  </main>
+  {% if ctaFixo %}
+  <aside class="cta-fixo no-print" aria-label="Ação principal do serviço">
+    <a class="btn btn-primario btn-grande" href="{{ ctaFixo.url }}">{{ ctaFixo.texto }} {{ icon("arrow-right") }}</a>
+  </aside>
+  {% endif %}
+  {% include "components/footer.njk" %}
+  {% include "components/cookie-banner.njk" %}
+
+  <div vw class="enabled" id="vlibras-box"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+
+  <script src="/assets/js/a11y.js" defer></script>
+  <script src="/assets/js/menu.js" defer></script>
+  <script src="/assets/js/busca.js" defer></script>
+  <script src="/assets/js/cookies.js" defer></script>
+  <script src="/assets/js/vlibras-init.js" defer></script>
+  {% for js in scripts %}<script src="{{ js }}" defer></script>
+  {% endfor %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+{%- from "components/macros.njk" import icon -%}
+<div class="utilbar no-print">
+  <div class="container">
+    <nav aria-label="Acessibilidade e links úteis" style="display:contents">
+      <ul class="grupo-a11y">
+        <li><span class="rotulo so-desktop">{{ icon("accessibility") }} Acessibilidade:</span></li>
+        <li><button type="button" id="fonte-menos" aria-label="A− Diminuir o tamanho da letra">A−</button></li>
+        <li><button type="button" id="fonte-normal" aria-label="A Tamanho normal da letra">A</button></li>
+        <li><button type="button" id="fonte-mais" aria-label="A+ Aumentar o tamanho da letra">A+</button></li>
+        <li><button type="button" id="contraste" aria-pressed="false">{{ icon("contrast") }} Alto contraste</button></li>
+        <li><button type="button" id="libras" aria-label="Libras: abrir o VLibras (tradução em Libras)">Libras</button></li>
+      </ul>
+      <ul>
+      <li><a href="{{ site.esicUrl if site.esicUrl != '[●]' else '/transparencia/acesso-a-informacao/' }}">Acesso à Informação (e-SIC)</a></li>
+      <li><a href="{{ site.prefeituraUrl }}" rel="noopener">Prefeitura de Frutal {{ icon("external", "icon-sm") }}<span class="sr-only"> (abre site externo)</span></a></li>
+    </ul>
+    </nav>
+  </div>
+</div>

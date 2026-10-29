@@ -1,0 +1,62 @@
+{#- Macros de campos de formulário acessíveis: rótulo visível, instrução antes do campo, erro específico -#}
+{% macro campo(id, rotulo, tipo="text", obrig=true, instr="", attrs="", nome="") %}
+<div class="campo" data-campo>
+  <label for="{{ id }}">{{ rotulo }}{% if obrig %} <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">(obrigatório)</span>{% else %} <span class="suave">(opcional)</span>{% endif %}</label>
+  {% if instr %}<p class="instrucao" id="{{ id }}-instr">{{ instr }}</p>{% endif %}
+  <input type="{{ tipo }}" id="{{ id }}" name="{{ nome or id }}"{% if obrig %} required{% endif %} aria-describedby="{% if instr %}{{ id }}-instr {% endif %}{{ id }}-erro" {{ attrs | safe }}>
+  <p class="erro-campo" id="{{ id }}-erro" hidden></p>
+</div>
+{% endmacro %}
+
+{% macro texto(id, rotulo, obrig=true, instr="", attrs="", nome="") %}
+<div class="campo" data-campo>
+  <label for="{{ id }}">{{ rotulo }}{% if obrig %} <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">(obrigatório)</span>{% else %} <span class="suave">(opcional)</span>{% endif %}</label>
+  {% if instr %}<p class="instrucao" id="{{ id }}-instr">{{ instr }}</p>{% endif %}
+  <textarea id="{{ id }}" name="{{ nome or id }}" rows="6"{% if obrig %} required{% endif %} aria-describedby="{% if instr %}{{ id }}-instr {% endif %}{{ id }}-erro" {{ attrs | safe }}></textarea>
+  <p class="erro-campo" id="{{ id }}-erro" hidden></p>
+</div>
+{% endmacro %}
+
+{% macro lista(id, rotulo, opcoes, obrig=true, instr="", attrs="", nome="") %}
+<div class="campo" data-campo>
+  <label for="{{ id }}">{{ rotulo }}{% if obrig %} <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">(obrigatório)</span>{% else %} <span class="suave">(opcional)</span>{% endif %}</label>
+  {% if instr %}<p class="instrucao" id="{{ id }}-instr">{{ instr }}</p>{% endif %}
+  <select id="{{ id }}" name="{{ nome or id }}"{% if obrig %} required{% endif %} aria-describedby="{% if instr %}{{ id }}-instr {% endif %}{{ id }}-erro" {{ attrs | safe }}>
+    <option value="">Selecione…</option>
+    {% for o in opcoes %}<option value="{{ o.v }}">{{ o.t }}</option>{% endfor %}
+  </select>
+  <p class="erro-campo" id="{{ id }}-erro" hidden></p>
+</div>
+{% endmacro %}
+
+{% macro arquivos(id, rotulo, instr, multiplo=false, obrig=false, nome="") %}
+<div class="campo" data-campo>
+  <label for="{{ id }}">{{ rotulo }}{% if obrig %} <span class="obrigatorio" aria-hidden="true">*</span>{% else %} <span class="suave">(opcional)</span>{% endif %}</label>
+  <p class="instrucao" id="{{ id }}-instr">{{ instr }}</p>
+  <input type="file" id="{{ id }}" name="{{ nome or id }}" {% if multiplo %}multiple{% endif %} accept=".jpg,.jpeg,.png,.webp,.pdf" aria-describedby="{{ id }}-instr {{ id }}-erro" data-max-mb="5" data-max-arquivos="{{ 5 if multiplo else 1 }}">
+  <p class="erro-campo" id="{{ id }}-erro" hidden></p>
+</div>
+{% endmacro %}
+
+{% macro consentimento(id="consentimento") %}
+<div class="campo" data-campo>
+  <div class="opcao">
+    <input type="checkbox" id="{{ id }}" name="{{ id }}" value="sim" required aria-describedby="{{ id }}-erro">
+    <label for="{{ id }}">Li e concordo que a Secretaria use meus dados apenas para atender este pedido, conforme a <a href="/privacidade/">Política de privacidade</a> (LGPD). <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">(obrigatório)</span></label>
+  </div>
+  <p class="erro-campo" id="{{ id }}-erro" hidden></p>
+</div>
+{% endmacro %}
+
+{% macro blocoControle(tipo) %}
+<div class="resumo-erros" id="resumo-erros" role="alert" tabindex="-1" hidden></div>
+<div class="armadilha" aria-hidden="true"><label for="website">Não preencha este campo</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_t" value="">
+<input type="hidden" name="_formulario" value="{{ tipo }}">
+{% endmacro %}
+
+{% macro dadosContato(obrig=true) %}
+{{ campo("nome", "Nome completo", "text", obrig, "", 'autocomplete="name" maxlength="120"') }}
+{{ campo("email", "E-mail", "email", obrig, "Usaremos para enviar a confirmação e o número de protocolo.", 'autocomplete="email" maxlength="160"') }}
+{{ campo("telefone", "Telefone com DDD", "tel", false, "Exemplo: (34) 99999-0000", 'autocomplete="tel" inputmode="tel" maxlength="20"') }}
+{% endmacro %}

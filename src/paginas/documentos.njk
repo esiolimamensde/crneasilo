@@ -1,0 +1,40 @@
+---
+layout: layouts/pagina.njk
+title: Documentos e publicações
+lead: Biblioteca de leis, decretos, portarias, planos, relatórios, editais e atas.
+permalink: /transparencia/documentos/index.html
+tags: paginas
+crumbs:
+  - { t: "Transparência e documentos", u: "/transparencia/" }
+description: Biblioteca de documentos oficiais da Secretaria de Meio Ambiente de Frutal, com busca e filtros por ano, tipo e órgão.
+scripts: ["/assets/js/filtros.js"]
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="alerta alerta-aviso">{{ icon("alert") }}<div><span class="alerta-titulo">Sobre a acessibilidade dos arquivos</span>Alguns PDFs podem não ter versão acessível para leitores de tela. Se precisar, peça uma versão acessível pelo <a href="/contato/">Fale conosco</a>.</div></div>
+<div class="filtros" data-filtro="documentos">
+  <div class="campo"><label for="d-q">Buscar documento</label><input type="search" id="d-q" data-f="q" autocomplete="off"></div>
+  <div class="campo"><label for="d-ano">Ano</label><select id="d-ano" data-f="ano"><option value="">Todos</option></select></div>
+  <div class="campo"><label for="d-tipo">Tipo</label><select id="d-tipo" data-f="tipo"><option value="">Todos</option>
+    <option value="lei">Lei</option><option value="decreto">Decreto</option><option value="portaria">Portaria</option><option value="resolucao">Resolução</option><option value="plano">Plano</option><option value="relatorio">Relatório</option><option value="edital">Edital</option><option value="ata">Ata</option></select></div>
+  <div class="campo"><label for="d-org">Órgão</label><select id="d-org" data-f="orgao"><option value="">Todos</option></select></div>
+</div>
+<p class="contador" data-contador role="status" aria-live="polite"></p>
+<div class="tabela-wrap">
+<table class="tabela tabela-cards">
+  <caption class="sr-only">Lista de documentos</caption>
+  <thead><tr><th scope="col">Título</th><th scope="col">Tipo</th><th scope="col">Data</th><th scope="col">Órgão</th><th scope="col">Arquivo</th><th scope="col">Baixar</th></tr></thead>
+  <tbody data-lista>
+  {%- for d in collections.documentos %}
+    <tr data-item data-ano="{{ d.data.ano }}" data-tipo="{{ d.data.tipo }}" data-orgao="{{ d.data.orgao }}" data-texto="{{ (d.data.title + ' ' + d.data.tipo + ' ' + d.data.orgao) | lower }}">
+      <td data-rotulo="Título"><strong>{{ d.data.title }}</strong></td>
+      <td data-rotulo="Tipo"><span class="badge badge-azul">{{ d.data.tipo | capitalize }}</span></td>
+      <td data-rotulo="Data"><time datetime="{{ d.date | dataISO }}">{{ d.date | dataBR }}</time></td>
+      <td data-rotulo="Órgão">{{ d.data.orgao }}</td>
+      <td data-rotulo="Arquivo">{{ d.data.formato }}, {{ d.data.tamanho }}{% if not d.data.acessivel %}<br><span class="pequeno suave">Sem versão acessível</span>{% else %}<br><span class="pequeno">Versão acessível</span>{% endif %}</td>
+      <td data-rotulo="Baixar"><a class="btn btn-terciario" href="{{ d.data.arquivo }}" download>{{ icon("download") }} Baixar documento<span class="sr-only">: {{ d.data.title }}</span></a></td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
+</div>
+<div class="sem-resultados" data-vazio hidden><p><strong>Nenhum documento encontrado.</strong></p><p>Mude os filtros ou limpe a busca.</p></div>

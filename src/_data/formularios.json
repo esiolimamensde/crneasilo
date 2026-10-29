@@ -1,0 +1,8 @@
+[
+  { "slug": "solicitacoes-gerais", "titulo": "Solicitação geral (requerimento)", "tipo": "solicitacao", "assunto": "geral", "servico": "Solicitações gerais" },
+  { "slug": "licencas-autorizacoes", "titulo": "Solicitação de licença ou autorização ambiental", "tipo": "solicitacao", "assunto": "licenca", "servico": "Licenças e autorizações ambientais" },
+  { "slug": "denuncias-ambientais", "titulo": "Denúncia ambiental", "tipo": "denuncia", "assunto": "denuncia", "servico": "Denúncias ambientais" },
+  { "slug": "agendamentos", "titulo": "Agendamento de atendimento ou visita", "tipo": "agendamento", "assunto": "agendamento", "servico": "Agendamentos" },
+  { "slug": "coleta-destinacao", "titulo": "Solicitação de coleta especial, poda ou entulho", "tipo": "solicitacao", "assunto": "coleta", "servico": "Coleta e destinação" },
+  { "slug": "arborizacao", "titulo": "Solicitação de muda ou poda de árvore", "tipo": "arborizacao", "assunto": "arborizacao", "servico": "Arborização" }
+]

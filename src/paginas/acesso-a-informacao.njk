@@ -1,0 +1,31 @@
+---
+layout: layouts/pagina.njk
+title: Acesso à informação
+lead: Qualquer pessoa pode pedir informações públicas, sem explicar o motivo. É um direito garantido por lei.
+permalink: /transparencia/acesso-a-informacao/index.html
+tags: paginas
+crumbs:
+  - { t: "Transparência e documentos", u: "/transparencia/" }
+description: Como fazer um pedido de acesso à informação (Lei nº 12.527/2011), prazos e recursos.
+---
+{%- from "components/macros.njk" import icon -%}
+<p>A <strong>Lei de Acesso à Informação (Lei nº 12.527/2011)</strong> garante que você peça dados e documentos de órgãos públicos. O sistema para isso se chama <strong>e-SIC</strong> (Serviço de Informações ao Cidadão).</p>
+<p><a class="btn btn-primario btn-grande" href="{{ site.esicUrl if site.esicUrl != '[●]' else '/contato/' }}">Fazer pedido no e-SIC</a> <span class="pequeno suave">Endereço oficial do e-SIC: {{ site.esicUrl }}</span></p>
+<h2>Como fazer um pedido</h2>
+<ol class="passos">
+  <li><span>Acesse o e-SIC pelo botão acima ou vá pessoalmente ao balcão de atendimento da Prefeitura [●].</span></li>
+  <li><span>Informe seus dados e descreva, com clareza, a informação que você quer.</span></li>
+  <li><span>Anote o número de protocolo.</span></li>
+  <li><span>Aguarde a resposta no prazo.</span></li>
+</ol>
+<h2>Prazos</h2>
+<ul>
+  <li>Resposta imediata, se a informação estiver disponível.</li>
+  <li>Até <strong>20 dias</strong> para responder, podendo ser prorrogado por mais <strong>10 dias</strong>, com justificativa.</li>
+</ul>
+<h2>Se não concordar com a resposta (recurso)</h2>
+<ul>
+  <li>Você pode recorrer em até <strong>10 dias</strong> após a resposta, à autoridade superior.</li>
+  <li>Se mantiver a negativa, ainda é possível recorrer a uma instância seguinte, conforme a lei municipal [●].</li>
+</ul>
+<div class="alerta alerta-info">{{ icon("info") }}<div><span class="alerta-titulo">Atenção</span>Prazos e instâncias de recurso devem ser confirmados com a regulamentação municipal da LAI [●].</div></div>

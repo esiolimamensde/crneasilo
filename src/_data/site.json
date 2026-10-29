@@ -1,0 +1,25 @@
+{
+  "nome": "Meio Ambiente de Frutal",
+  "nomeCompleto": "Secretaria Municipal de Meio Ambiente de Frutal",
+  "municipio": "Frutal",
+  "uf": "MG",
+  "url": "https://meioambiente.frutal.mg.gov.br",
+  "descricao": "Informações, serviços e canais de atendimento da Secretaria Municipal de Meio Ambiente de Frutal (MG): licenças, denúncias ambientais, arborização, coleta e educação ambiental.",
+  "cnpj": "[●]",
+  "endereco": "[●]",
+  "telefone": "[●]",
+  "telefoneEmergencia": "[●]",
+  "whatsapp": "[●]",
+  "email": "[●]",
+  "horario": "[●]",
+  "ultimaAtualizacao": "2026-10-29",
+  "prefeituraUrl": "https://www.frutal.mg.gov.br",
+  "esicUrl": "[●]",
+  "redes": [
+    { "nome": "Facebook", "icone": "facebook", "url": "[●]" },
+    { "nome": "Instagram", "icone": "instagram", "url": "[●]" },
+    { "nome": "YouTube", "icone": "youtube", "url": "[●]" }
+  ],
+  "creditos": "Desenvolvido para a Prefeitura Municipal de Frutal [●]",
+  "versaoSite": "1.0"
+}

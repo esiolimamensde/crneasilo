@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /busca/
+Sitemap: https://meioambiente.frutal.mg.gov.br/sitemap.xml

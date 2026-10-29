@@ -1,0 +1,30 @@
+---
+layout: layouts/pagina.njk
+title: Orientações ao cidadão
+lead: Perguntas frequentes sobre denúncias, licenças, árvores e resíduos, em linguagem simples.
+permalink: /servicos/orientacoes/index.html
+tags: paginas
+crumbs:
+  - { t: "Serviços", u: "/servicos/" }
+description: Perguntas frequentes sobre serviços ambientais da Prefeitura de Frutal, organizadas por tema.
+scripts: ["/assets/js/filtros.js"]
+---
+{%- from "components/macros.njk" import icon -%}
+<div class="filtros" data-filtro="faq">
+  <div class="campo"><label for="faq-q">Buscar uma pergunta</label><input type="search" id="faq-q" data-f="q" autocomplete="off"></div>
+  <div class="campo"><label for="faq-tema">Tema</label>
+    <select id="faq-tema" data-f="tema"><option value="">Todos os temas</option>
+      {%- for t in faq | unicos("tema") %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+    </select>
+  </div>
+</div>
+<p class="contador" data-contador role="status" aria-live="polite"></p>
+<div data-lista>
+{%- for q in faq %}
+  <details class="card" style="margin-bottom:.75rem" data-item data-tema="{{ q.tema }}" data-texto="{{ (q.pergunta + ' ' + q.resposta) | lower }}">
+    <summary style="cursor:pointer;font-weight:700;min-height:2.75rem;display:flex;align-items:center;gap:.5rem"><span class="badge badge-azul">{{ q.tema }}</span> {{ q.pergunta }}</summary>
+    <p style="margin-top:.75rem">{{ q.resposta }}</p>
+  </details>
+{%- endfor %}
+</div>
+<div class="sem-resultados" data-vazio hidden><p><strong>Nenhuma pergunta encontrada.</strong></p><p>Tente outras palavras ou <a href="/contato/">fale conosco</a>.</p></div>

@@ -1,0 +1,107 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: formularios
+  size: 1
+  alias: f
+permalink: "/servicos/{{ f.slug }}/solicitar/index.html"
+tags: paginasForm
+---
+{%- from "components/macros.njk" import icon -%}
+{%- from "forms/campos.njk" import campo, texto, lista, arquivos, consentimento, blocoControle, dadosContato -%}
+<div class="page-hero">
+  <div class="container">
+    <h1>{{ f.titulo }}</h1>
+    <p>Os campos marcados com <span class="obrigatorio" aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios. Ao enviar, você recebe um número de protocolo.</p>
+  </div>
+</div>
+<div class="container secao">
+  <div class="alerta alerta-info">{{ icon("info") }}<div><span class="alerta-titulo">Não consegue usar o formulário?</span>Ligue para {{ site.telefone }} ou vá à sede da Secretaria. Endereço: {{ site.endereco }}.</div></div>
+
+  <form class="form" id="form-principal" method="post" action="/api/{{ f.tipo }}" enctype="multipart/form-data" novalidate data-tipo="{{ f.tipo }}">
+    {{ blocoControle(f.tipo) }}
+    <input type="hidden" name="assunto_origem" value="{{ f.assunto }}">
+
+    {% if f.tipo == "denuncia" %}
+      <fieldset class="campo" data-campo>
+        <legend>Como você quer fazer a denúncia? <span class="obrigatorio" aria-hidden="true">*</span></legend>
+        <p class="instrucao">A denúncia anônima é aceita. Nela, não guardamos seu nome, e-mail ou telefone. Você recebe só o número de protocolo para acompanhar.</p>
+        <div class="opcao"><input type="radio" id="id-identificada" name="identificacao" value="identificada" checked><label for="id-identificada">Quero me identificar (a equipe pode entrar em contato)</label></div>
+        <div class="opcao"><input type="radio" id="id-anonima" name="identificacao" value="anonima"><label for="id-anonima">Quero denunciar de forma anônima</label></div>
+      </fieldset>
+      <div id="bloco-identificacao">
+        {{ dadosContato(true) }}
+      </div>
+      {{ lista("categoria", "Tipo de problema", [
+        {v:"queimada", t:"Queimada"}, {v:"descarte", t:"Descarte irregular de lixo ou entulho"}, {v:"desmatamento", t:"Desmatamento"},
+        {v:"poluicao-hidrica", t:"Poluição de rio, córrego ou nascente"}, {v:"poluicao-sonora", t:"Poluição sonora (barulho excessivo)"}, {v:"maus-tratos", t:"Maus-tratos a animais"}, {v:"outro", t:"Outro problema ambiental"}
+      ]) }}
+      {{ campo("endereco", "Endereço ou local do problema", "text", true, "Rua, número, bairro ou uma referência, como “ao lado da ponte do córrego X”.", 'maxlength="200"') }}
+      <div class="campo">
+        <p class="instrucao" id="mapa-instr"><strong>Marcar no mapa (opcional).</strong> Clique no mapa para indicar o ponto exato. Se preferir, use apenas o campo de endereço acima.</p>
+        <div id="mapa-area"><button type="button" class="btn btn-terciario" id="mapa-ativar" hidden>{{ icon("map-pin") }} Abrir mapa para marcar o local</button><p class="pequeno suave" id="mapa-aviso">O mapa precisa de JavaScript. Use o campo de endereço acima.</p></div>
+        <div id="mapa-denuncia" role="application" aria-label="Mapa para marcar o local do problema. Alternativa: preencha o endereço no campo acima." aria-describedby="mapa-instr" hidden></div>
+        <input type="hidden" name="latitude" id="latitude"><input type="hidden" name="longitude" id="longitude">
+        <p class="pequeno suave" id="mapa-coord" aria-live="polite"></p>
+      </div>
+      {{ campo("quando", "Quando aconteceu?", "date", false, "Data aproximada.", "") }}
+      {{ texto("descricao", "Descreva o que está acontecendo", true, "Conte o que você viu, há quanto tempo e se há risco para pessoas ou animais.", 'maxlength="2000"') }}
+      {{ arquivos("fotos", "Fotos do problema", "Até 5 fotos (JPG, PNG ou WebP), de até 5 MB cada. Não fotografe pessoas de perto.", true) }}
+      <div id="bloco-consent">{{ consentimento() }}</div>
+
+    {% elif f.tipo == "agendamento" %}
+      {{ lista("tipoAgendamento", "O que você quer agendar?", [
+        {v:"atendimento", t:"Atendimento presencial com a equipe técnica"}, {v:"vistoria", t:"Vistoria ou visita técnica"}, {v:"palestra", t:"Palestra ou visita educativa para escola"}
+      ]) }}
+      <div id="bloco-escola" hidden>{{ campo("escola", "Nome da escola ou instituição", "text", false, "Preencha para palestras e visitas educativas.", 'maxlength="160"') }}</div>
+      {{ campo("data", "Data desejada", "date", true, "Escolha um dia útil. Depois escolha o horário.", "") }}
+      {{ lista("horario", "Horário disponível", [], true, "Os horários aparecem depois que você escolhe a data.", "disabled") }}
+      <p class="pequeno suave" id="horarios-status" role="status" aria-live="polite"></p>
+      {{ dadosContato(true) }}
+      {{ texto("descricao", "Observações", false, "Conte rapidamente o motivo, se quiser.", 'maxlength="1000"') }}
+      {{ consentimento() }}
+
+    {% elif f.tipo == "arborizacao" %}
+      {{ lista("pedido", "O que você precisa?", [{v:"muda", t:"Receber uma muda de árvore"}, {v:"poda", t:"Poda de árvore"}, {v:"remocao", t:"Avaliação para retirada de árvore"}]) }}
+      {{ campo("endereco", "Endereço do local", "text", true, "Rua, número e bairro.", 'maxlength="200"') }}
+      {{ texto("descricao", "Descreva a situação", true, "Por exemplo: galho encostando na fiação, árvore inclinada ou local onde a muda será plantada.", 'maxlength="1500"') }}
+      {{ arquivos("fotos", "Foto do local ou da árvore", "Uma foto ajuda a equipe a se preparar (JPG, PNG ou WebP, até 5 MB).", false) }}
+      {{ dadosContato(true) }}
+      {{ consentimento() }}
+
+    {% else %}
+      {% if f.assunto == "licenca" %}
+        {{ lista("assunto", "Tipo de licença ou autorização", [
+          {v:"licenca-previa", t:"Licença prévia (LP)"}, {v:"licenca-instalacao", t:"Licença de instalação (LI)"}, {v:"licenca-operacao", t:"Licença de operação (LO)"},
+          {v:"supressao", t:"Autorização para supressão de vegetação"}, {v:"outorga", t:"Outorga"}, {v:"certidao", t:"Certidão"}, {v:"outro", t:"Outro / não sei"}
+        ]) }}
+      {% elif f.assunto == "coleta" %}
+        {{ lista("assunto", "O que você precisa?", [{v:"coleta-especial", t:"Coleta de resíduos especiais"}, {v:"poda-residuo", t:"Retirada de galhos de poda"}, {v:"entulho", t:"Retirada de entulho"}]) }}
+      {% else %}
+        {{ lista("assunto", "Assunto", [{v:"requerimento", t:"Requerimento geral"}, {v:"informacao", t:"Pedido de informação"}, {v:"certidao", t:"Certidão"}, {v:"outro", t:"Outro"}]) }}
+      {% endif %}
+      {{ dadosContato(true) }}
+      {{ campo("documento", "CPF ou CNPJ", "text", f.assunto == "licenca", "Somente números. Necessário para licenças.", 'inputmode="numeric" maxlength="18"') }}
+      {{ campo("endereco", "Endereço do imóvel ou da atividade", "text", true, "Rua, número, bairro.", 'maxlength="200"') }}
+      {{ texto("descricao", "Descreva seu pedido", true, "Explique o que você precisa. Escreva do seu jeito, em poucas frases.", 'maxlength="3000"') }}
+      {{ arquivos("anexos", "Documentos", "Até 5 arquivos (PDF, JPG, PNG), de até 5 MB cada.", true) }}
+      {{ consentimento() }}
+    {% endif %}
+
+    <div class="acoes">
+      <button type="submit" class="btn btn-primario btn-grande">{{ "Enviar denúncia" if f.tipo == "denuncia" else "Enviar solicitação" }}</button>
+      <a class="btn btn-terciario btn-grande" href="/servicos/{{ f.slug }}/">Voltar ao serviço</a>
+    </div>
+  </form>
+
+  <div id="confirmacao" class="alerta alerta-sucesso" tabindex="-1" role="status" hidden>
+    {{ icon("check-circle") }}
+    <div>
+      <span class="alerta-titulo">Recebemos o seu pedido</span>
+      <p>Guarde o número de protocolo para acompanhar:</p>
+      <p><span class="protocolo-caixa" id="numero-protocolo"></span></p>
+      <p id="msg-confirmacao"></p>
+      <p><a class="btn btn-secundario" href="/servicos/consultar-protocolo/">Consultar protocolo</a></p>
+    </div>
+  </div>
+</div>

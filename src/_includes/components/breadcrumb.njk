@@ -1,0 +1,9 @@
+<nav class="breadcrumb container" aria-label="Você está aqui">
+  <ol>
+    <li><a href="/">Início</a></li>
+    {%- for c in crumbs %}
+    <li><a href="{{ c.u }}">{{ c.t }}</a></li>
+    {%- endfor %}
+    <li><span aria-current="page">{{ crumbTitulo or title }}</span></li>
+  </ol>
+</nav>

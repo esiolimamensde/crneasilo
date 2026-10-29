@@ -1,0 +1,10 @@
+[
+  { "dia": 22, "mes": 3, "titulo": "Dia Mundial da Água", "descricao": "Data para lembrar a importância de cuidar de rios, nascentes e do uso consciente da água." },
+  { "dia": 15, "mes": 4, "titulo": "Dia Nacional da Conservação do Solo", "descricao": "Data dedicada à proteção do solo contra erosão e degradação." },
+  { "dia": 22, "mes": 4, "titulo": "Dia da Terra", "descricao": "Data mundial de reflexão sobre a proteção do planeta." },
+  { "dia": 22, "mes": 5, "titulo": "Dia Internacional da Biodiversidade", "descricao": "Data para valorizar a variedade de plantas, animais e ambientes naturais." },
+  { "dia": 5, "mes": 6, "titulo": "Dia Mundial do Meio Ambiente", "descricao": "Principal data ambiental do ano; marca o início da Semana do Meio Ambiente." },
+  { "dia": 16, "mes": 9, "titulo": "Dia Internacional da Preservação da Camada de Ozônio", "descricao": "Data sobre a proteção da camada que nos defende dos raios ultravioleta do sol." },
+  { "dia": 21, "mes": 9, "titulo": "Dia Nacional da Árvore", "descricao": "Data para plantar, cuidar e valorizar as árvores da cidade." },
+  { "dia": 4, "mes": 10, "titulo": "Dia Mundial dos Animais", "descricao": "Data para promover o respeito e o cuidado com os animais." }
+]

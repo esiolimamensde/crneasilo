@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+<div class="page-hero">
+  <div class="container">
+    <h1>{{ title }}</h1>
+    {% if lead %}<p>{{ lead }}</p>{% endif %}
+  </div>
+</div>
+<div class="container secao">
+  <div class="texto">
+{{ content | safe }}
+  </div>
+</div>
